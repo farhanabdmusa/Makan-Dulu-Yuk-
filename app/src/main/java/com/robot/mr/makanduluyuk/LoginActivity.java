@@ -1,5 +1,7 @@
 package com.robot.mr.makanduluyuk;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -14,7 +16,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.robot.mr.makanduluyuk.model.User;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -30,6 +34,14 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        final SessionManager sessionManager = new SessionManager(this);
+
+        if(sessionManager.checkLogin()){
+            finish();
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+        }
 
         final ProgressBar progressBar;
 
@@ -61,9 +73,19 @@ public class LoginActivity extends AppCompatActivity {
 
                                     try {
                                         JSONObject obj = new JSONObject(response);
+                                        JSONArray userDetail = obj.getJSONArray("result");
 
                                         if (obj.getString(Config.JSON_RESPONSE).equals("Success")){
-                                            Toast.makeText(LoginActivity.this, obj.getString("result"), Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(LoginActivity.this, obj.getString("response"), Toast.LENGTH_SHORT).show();
+                                            User user = new User();
+                                            user.setNama(userDetail.getJSONObject(0).getString(Config.NAME));
+                                            user.setDob(userDetail.getJSONObject(0).getString(Config.DOB));
+                                            user.setJenisKelamin(userDetail.getJSONObject(0).getString(Config.JENIS_KELAMIN));
+                                            sessionManager.createLoginSession(user.getNama(), user.getDob(), user.getJenisKelamin());
+                                            Toast.makeText(LoginActivity.this, obj.getJSONArray("result").getString(0), Toast.LENGTH_SHORT).show();
+                                            finish();
+                                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                            startActivity(intent);
                                         } else{
                                             Toast.makeText(LoginActivity.this, obj.getString("response"), Toast.LENGTH_SHORT)
                                                     .show();

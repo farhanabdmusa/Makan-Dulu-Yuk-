@@ -13,7 +13,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        FloatingActionButton tambah = (FloatingActionButton) findViewById(R.id.floatingActionButton);
+        FloatingActionButton tambah = findViewById(R.id.floatingActionButton);
         tambah.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void openActivityAgung(){
-        Intent intent = new Intent(this, InputKegitatan);
+        Intent intent = new Intent(MainActivity.this, InputKegiatan.class);
         startActivity(intent);
     }
 }
