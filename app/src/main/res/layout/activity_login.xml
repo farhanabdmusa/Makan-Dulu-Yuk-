@@ -19,6 +19,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:hint="Username"
+        android:inputType="textEmailAddress"
         android:layout_below="@id/username_tv"/>
 
     <TextView
@@ -34,6 +35,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:hint="Password"
+        android:inputType="textPassword"
         android:layout_below="@id/password_tv"/>
 
     <Button
