@@ -11,17 +11,25 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import java.util.Calendar;
 
 public class InputKegiatan extends AppCompatActivity {
 
+    DatabaseHelper myDB;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_input_kegiatan);
+
+        myDB = new DatabaseHelper(this);
+
         TextView judul = (TextView) findViewById(R.id.judul);
-        TextView eNama = (TextView) findViewById(R.id.nama_tv);
+
+        TextView nama_tv = (TextView) findViewById(R.id.nama_tv);
+        final EditText eNama = (EditText) findViewById(R.id.nama_et);
 
         TextView tanggal_tv = (TextView) findViewById(R.id.tanggal_tv);
         final EditText eTanggal = (EditText) findViewById(R.id.tanggal_et);
@@ -46,7 +54,7 @@ public class InputKegiatan extends AppCompatActivity {
         });
 
         TextView mulai_tv = (TextView) findViewById(R.id.mulai_tv);
-        EditText eMulai = (EditText) findViewById(R.id.mulai_et);
+        final EditText eMulai = (EditText) findViewById(R.id.mulai_et);
         eMulai.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -61,7 +69,7 @@ public class InputKegiatan extends AppCompatActivity {
         });
 
         TextView akhir_tv = (TextView) findViewById(R.id.akhir_tv);
-        EditText eAkhir = (EditText) findViewById(R.id.akhir_et);
+        final EditText eAkhir = (EditText) findViewById(R.id.akhir_et);
         eAkhir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -79,7 +87,15 @@ public class InputKegiatan extends AppCompatActivity {
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                boolean isInserted = myDB.insertData(eNama.getText().toString(),
+                                                     eTanggal.getText().toString(),
+                                                     eMulai.getText().toString(),
+                                                     eAkhir.getText().toString());
+                if(isInserted = true){
+                    Toast.makeText(InputKegiatan.this, "Data telah disimpan", Toast.LENGTH_LONG).show();
+                } else{
+                    Toast.makeText(InputKegiatan.this, "Data tidak tersimpan", Toast.LENGTH_LONG).show();
+                }
             }
         });
 
