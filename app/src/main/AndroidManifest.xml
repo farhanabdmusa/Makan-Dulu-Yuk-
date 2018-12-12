@@ -19,7 +19,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".InputKegiatan" />
-        <activity android:name=".MainActivity"></activity>
         <activity android:name=".RegisterActivity" />
     </application>
 
