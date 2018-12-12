@@ -22,25 +22,5 @@ public class LoginActivity extends AppCompatActivity {
         username= findViewById(R.id.username);
         password = findViewById(R.id.password);
 
-        regButton = findViewById(R.id.registerButton);
 
-        regButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                registrationAvtivity();
-            }
-        });
-
-        Bundle extras = getIntent().getExtras();
-        if (extras != null) {
-            String value = extras.getString("dataUser");
-            //The key argument here must match that used in the other activity
-            Toast.makeText(this, value, Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    public void registrationAvtivity() {
-        Intent intent = new Intent(this, RegisterActivity.class);
-        startActivity(intent);
-    }
 }
