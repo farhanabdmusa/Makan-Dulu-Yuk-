@@ -37,7 +37,8 @@ import java.util.regex.Pattern;
     private EditText password;
     private EditText confirmPassword;
     private RadioGroup gender;
-    private TextView dateOfBirth;
+    private Button dateCalendar;
+    private EditText dateOfBirth;
     private DatePickerDialog.OnDateSetListener tanggal;
 
     private Button register;
@@ -58,10 +59,11 @@ import java.util.regex.Pattern;
         password = findViewById(R.id.passwordEditText);
         confirmPassword = findViewById(R.id.rePasswordEditText);
         gender = findViewById(R.id.genderRadioGroup);
+        dateCalendar = findViewById(R.id.calendar);
         dateOfBirth = findViewById(R.id.dateEditText);
         register = findViewById(R.id.daftarButton);
 
-        dateOfBirth.setOnClickListener(new View.OnClickListener(){
+        dateCalendar.setOnClickListener(new View.OnClickListener(){
 
             @Override
             public void onClick(View v) {
@@ -86,7 +88,7 @@ import java.util.regex.Pattern;
         cal.set(Calendar.DAY_OF_MONTH,dayOfMonth);
         String birthDateFormat = DateFormat.getDateInstance().format(cal.getTime());
 
-        TextView tanggalLahir = (TextView) findViewById(R.id.dateEditText);
+        EditText tanggalLahir = (EditText) findViewById(R.id.dateEditText);
         tanggalLahir.setText(birthDateFormat);
     }
 
@@ -235,5 +237,6 @@ import java.util.regex.Pattern;
          if (progressDialog.isShowing())
              progressDialog.dismiss();
      }
+
  }
 

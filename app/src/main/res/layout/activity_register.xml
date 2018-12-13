@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@mipmap/background_register"
     tools:context=".LoginActivity">
 
 
@@ -16,11 +17,13 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="50dp"
-        android:layout_marginTop="35dp"
+        android:layout_marginTop="40dp"
         android:layout_marginEnd="50dp"
         android:gravity="left"
         android:hint="Nama Lengkap"
-        android:textSize="17dp"/>
+        android:padding="15dp"
+        android:textSize="17dp"
+        android:background="@drawable/shape_input_register"/>
 
     <EditText
         android:id="@+id/usernameEditText"
@@ -34,7 +37,10 @@
         android:layout_marginEnd="50dp"
         android:gravity="left"
         android:hint="Username"
-        android:textSize="17dp"/>
+        android:textSize="17dp"
+        android:padding="15dp"
+        android:background="@drawable/shape_input_register"
+        android:drawablePadding="10dp"/>
 
     <EditText
         android:id="@+id/passwordEditText"
@@ -49,7 +55,9 @@
         android:gravity="left"
         android:hint="Password"
         android:inputType="textPassword"
-        android:textSize="17dp"/>
+        android:textSize="17dp"
+        android:padding="15dp"
+        android:background="@drawable/shape_input_register"/>
 
     <EditText
         android:id="@+id/rePasswordEditText"
@@ -64,17 +72,11 @@
         android:gravity="left"
         android:hint="Ulangi Password"
         android:inputType="textPassword"
-        android:textSize="17dp"/>
+        android:textSize="17dp"
+        android:padding="15dp"
+        android:background="@drawable/shape_input_register"/>
 
-    <TextView
-        android:id="@+id/genderTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/rePasswordEditText"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="20dp"
-        android:text="Jenis Kelamin : "
-        android:textSize="17dp"/>
+
 
     <RadioGroup
         android:id="@+id/genderRadioGroup"
@@ -84,7 +86,7 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="50dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="50dp"
         android:layout_toRightOf="@id/genderTextView"
         android:orientation="horizontal">
@@ -105,18 +107,44 @@
             android:textSize="15dp"/>
     </RadioGroup>
 
-
-    <TextView
-        android:id="@+id/dateEditText"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/genderRadioGroup"
-        android:layout_alignParentStart="true"
         android:layout_marginStart="50dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="50dp"
-        android:hint="Tanggal Lahir"
-        android:textSize="17dp"/>
+        android:layout_marginBottom="20dp"
+        android:gravity="left"
+        android:orientation="horizontal">
+
+
+        <EditText
+            android:id="@+id/dateEditText"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/passwordEditText"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:background="@drawable/shape_input_register"
+            android:gravity="left"
+            android:hint="Tanggal Lahir"
+            android:padding="15dp"
+            android:textSize="17dp" />
+
+        <Button
+            android:id="@+id/calendar"
+            android:layout_width="60dp"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/genderRadioGroup"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="10dp"
+            android:background="@drawable/ic_date_range_black_24dp"
+            android:textColor="#000"
+            android:textSize="17dp" />
+
+    </LinearLayout>
+
+
 
     <Button
         android:id="@+id/daftarButton"
@@ -125,10 +153,11 @@
         android:layout_below="@+id/dateEditText"
         android:layout_alignParentStart="true"
         android:layout_marginStart="50dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="30dp"
         android:layout_marginEnd="50dp"
-        android:height="55dp"
+        android:height="50dp"
         android:text="Daftar"
-        android:textSize="17dp" />
+        android:textSize="17dp"
+        android:background="#87e700"/>
 
 </LinearLayout>
