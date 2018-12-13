@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    android:id="@+id/parent_layout">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Kegiatan1"
+        android:id="@+id/nama_kegiatan"
+        android:textColor="#000"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="25dp"
+        android:textSize="17sp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="JamAwal"
+        android:id="@+id/jam_awal"
+        android:textColor="#000"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@+id/strip"
+        android:layout_marginLeft="120dp"
+        android:textSize="17sp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="-"
+        android:id="@+id/strip"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@+id/jam_akhir"
+        android:textSize="17sp"
+        android:textColor="#000"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="JamAkhir"
+        android:id="@+id/jam_akhir"
+        android:layout_centerVertical="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="25dp"
+        android:textSize="17sp"
+        android:textColor="#000"/>
+</RelativeLayout>
