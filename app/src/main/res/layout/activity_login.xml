@@ -22,16 +22,12 @@
         android:layout_height="50dp"
         android:layout_marginTop="40dp"
         android:background="@drawable/shape_input_login"
-        android:drawableLeft="@drawable/ic_person_outline_black_24dp"
+        android:drawableStart="@drawable/ic_person_outline_black_24dp"
         android:drawablePadding="7dp"
         android:hint="Username"
-<<<<<<< HEAD
         android:inputType="textEmailAddress"
-        android:layout_below="@id/username_tv"/>
-=======
         android:padding="10dp"
-        android:textSize="17dp" />
->>>>>>> fc93d4a746d15a0d0a59af2ad9ecee94a58ff0cb
+        android:textSize="17sp" />
 
 
     <EditText
@@ -40,49 +36,40 @@
         android:layout_height="50dp"
         android:layout_marginTop="20dp"
         android:background="@drawable/shape_input_login"
-        android:drawableLeft="@drawable/ic_lock_outline_black_24dp"
+        android:drawableStart="@drawable/ic_lock_outline_black_24dp"
         android:drawablePadding="7dp"
         android:hint="Password"
-<<<<<<< HEAD
         android:inputType="textPassword"
-        android:layout_below="@id/password_tv"/>
-=======
         android:padding="10dp"
-        android:textSize="17dp"
-        android:inputType="textPassword"/>
+        android:textSize="17sp" />
 
     <TextView
         android:id="@+id/lupa_password"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:layout_below="@id/login"
         android:layout_marginTop="10dp"
-        android:gravity="right"
+        android:gravity="end"
         android:text="Lupa Password?"
-        android:textSize="13dp" />
-
->>>>>>> fc93d4a746d15a0d0a59af2ad9ecee94a58ff0cb
+        android:textSize="13sp" />
 
     <Button
         android:id="@+id/login"
         android:layout_width="250dp"
         android:layout_height="50dp"
-        android:layout_below="@id/password"
         android:layout_marginTop="20dp"
         android:background="#ff7d4b"
         android:text="Login"
-        android:textSize="17dp"/>
+        android:textSize="17sp"/>
 
     <TextView
         android:id="@+id/daftar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/login"
         android:layout_marginTop="20dp"
-        android:gravity="left"
+        android:gravity="start"
         android:text="Daftar di sini"
         android:textStyle="bold"
-        android:textSize="15dp"/>
+        android:textSize="15sp"/>
 
 
     <ProgressBar

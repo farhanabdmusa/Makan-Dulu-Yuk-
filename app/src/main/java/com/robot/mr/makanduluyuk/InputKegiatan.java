@@ -18,6 +18,7 @@ import java.util.Calendar;
 public class InputKegiatan extends AppCompatActivity {
 
     DatabaseHelper myDB;
+    EditText eTanggal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,30 +27,26 @@ public class InputKegiatan extends AppCompatActivity {
 
         myDB = new DatabaseHelper(this);
 
+        eTanggal = findViewById(R.id.tanggal_et);
+
         TextView judul = (TextView) findViewById(R.id.judul);
 
         TextView nama_tv = (TextView) findViewById(R.id.nama_tv);
         final EditText eNama = (EditText) findViewById(R.id.nama_et);
 
         TextView tanggal_tv = (TextView) findViewById(R.id.tanggal_tv);
-        final EditText eTanggal = (EditText) findViewById(R.id.tanggal_et);
         eTanggal.setInputType(InputType.TYPE_NULL);
         eTanggal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final Calendar cldr = Calendar.getInstance();
-                int day = cldr.get(Calendar.DAY_OF_MONTH);
-                int month = cldr.get(Calendar.MONTH);
-                int year = cldr.get(Calendar.YEAR);
-                // date picker dialog
-                DatePickerDialog picker = new DatePickerDialog(InputKegiatan.this,
-                        new DatePickerDialog.OnDateSetListener() {
-                            @Override
-                            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                                eTanggal.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
-                            }
-                        }, year, month, day);
-                picker.show();
+                dateShow();
+            }
+        });
+
+        findViewById(R.id.calendar_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dateShow();
             }
         });
 
@@ -61,9 +58,9 @@ public class InputKegiatan extends AppCompatActivity {
                 TimePickerDialog timePickerDialog = new TimePickerDialog(InputKegiatan.this, new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker timePicker, int hourOfDay, int minutes) {
-
+                        eMulai.setText(hourOfDay+":"+minutes);
                     }
-                }, 0, 0, false);
+                }, 0, 0, true);
                 timePickerDialog.show();
             }
         });
@@ -76,9 +73,9 @@ public class InputKegiatan extends AppCompatActivity {
                 TimePickerDialog timePickerDialog = new TimePickerDialog(InputKegiatan.this, new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker timePicker, int hourOfDay, int minutes) {
-
+                        eAkhir.setText(hourOfDay+":"+minutes);
                     }
-                }, 0, 0, false);
+                }, 0, 0, true);
                 timePickerDialog.show();
             }
         });
@@ -87,6 +84,18 @@ public class InputKegiatan extends AppCompatActivity {
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(eNama.getText().toString().isEmpty()){
+                    eNama.setError("Nama kegiatan harus diisi");
+                    eNama.requestFocus();
+                }
+                if(eTanggal.getText().toString().isEmpty()){
+                    eTanggal.setError("Tanggal harus diisi");
+                    eTanggal.requestFocus();
+                }
+                if(eMulai.getText().toString().isEmpty()){
+                    eMulai.setError("Waktu mulai harus diisi");
+                    eMulai.requestFocus();
+                }
                 boolean isInserted = myDB.insertData(eNama.getText().toString(),
                                                      eTanggal.getText().toString(),
                                                      eMulai.getText().toString(),
@@ -99,12 +108,28 @@ public class InputKegiatan extends AppCompatActivity {
             }
         });
 
-        Button cancel = (Button) findViewById(R.id.cancel);
+        Button cancel = findViewById(R.id.cancel);
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                finish();
             }
         });
     }
+
+    public void dateShow(){
+        final Calendar cldr = Calendar.getInstance();
+        int day = cldr.get(Calendar.DAY_OF_MONTH);
+        int month = cldr.get(Calendar.MONTH);
+        int year = cldr.get(Calendar.YEAR);
+        // date picker dialog
+        DatePickerDialog picker = new DatePickerDialog(InputKegiatan.this,
+                new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                        eTanggal.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
+                    }
+                }, year, month, day);
+        picker.show();
+    };
 }
