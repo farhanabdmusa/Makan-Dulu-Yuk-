@@ -59,6 +59,7 @@ public class LoginActivity extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                loginButton.setEnabled(false);
                 final String usernames = username.getText().toString();
                 final String pass = password.getText().toString();
 
@@ -93,6 +94,7 @@ public class LoginActivity extends AppCompatActivity {
                                         } else{
                                             Toast.makeText(LoginActivity.this, obj.getString("response"), Toast.LENGTH_SHORT)
                                                     .show();
+                                            loginButton.setEnabled(true);
                                         }
                                     } catch (JSONException e) {
                                         e.printStackTrace();
