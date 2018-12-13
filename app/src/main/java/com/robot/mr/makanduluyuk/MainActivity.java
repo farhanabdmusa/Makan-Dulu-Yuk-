@@ -16,6 +16,8 @@ import android.view.View;
 
 import java.util.ArrayList;
 
+import static android.app.Notification.EXTRA_NOTIFICATION_ID;
+
 public class MainActivity extends AppCompatActivity {
 
     DatabaseHelper myDB;
@@ -99,6 +101,11 @@ public class MainActivity extends AppCompatActivity {
     public void notificationCall(){
         Intent intent = new Intent(this, InputKegiatan.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+
+        Intent snoozeIntent = new Intent(this, InputKegiatan.class);
+        snoozeIntent.setAction(Intent.ACTION_WEB_SEARCH);
+        snoozeIntent.putExtra(EXTRA_NOTIFICATION_ID, 0);
+
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this)
@@ -108,6 +115,7 @@ public class MainActivity extends AppCompatActivity {
                 .setAutoCancel(true)
                 .setSmallIcon(R.drawable.ic_person_outline_black_24dp)
                 // Set the intent that will fire when the user taps the notification
+                .addAction(R.drawable.ic_date_range_black_24dp, "SNOOZE", pendingIntent)
                 .setContentIntent(pendingIntent);
 
         NotificationManager notificationManager = (NotificationManager) getSystemService(this.NOTIFICATION_SERVICE);
