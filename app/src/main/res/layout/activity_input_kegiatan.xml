@@ -5,116 +5,183 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".InputKegiatan">
+    android:gravity="center_horizontal"
+    tools:context=".InputKegiatan"
+    android:background="@mipmap/background_common">
 
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp">
 
         <TextView
             android:id="@+id/judul"
-            android:layout_width="386dp"
-            android:layout_height="41dp"
-            android:layout_above="@+id/password"
-            android:layout_marginBottom="0dp"
-            android:text="INPUT KEGIATAN"
-            android:textColor="#000"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
             android:gravity="center"
-            android:textAlignment="center"/>
+            android:text="INPUT KEGIATAN"
+            android:textAlignment="center"
+            android:textColor="#000"
+            android:textSize="21dp"/>
     </LinearLayout>
+
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:id="@+id/kegiatan"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp">
 
         <TextView
             android:id="@+id/nama_tv"
             android:layout_width="115dp"
-            android:layout_height="wrap_content"
-            android:layout_above="@+id/password"
-            android:layout_marginBottom="0dp"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:textAlignment="textStart"
             android:text="Nama Kegiatan"
-            android:textColor="#000" />
+            android:textColor="#000"
+            android:textSize="15dp" />
+
+        <TextView
+            android:layout_width="5dp"
+            android:layout_height="match_parent"
+            android:text=":"
+            android:gravity="center"
+            android:textColor="#000"
+            android:textSize="15dp"/>
 
         <EditText
             android:id="@+id/nama_et"
-            android:layout_width="291dp"
-            android:layout_height="wrap_content"
+            android:layout_width="180dp"
+            android:layout_height="match_parent"
             android:hint="kegiatan" />
 
     </LinearLayout>
 
 
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:id="@+id/kegiatan"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp">
 
         <TextView
             android:id="@+id/tanggal_tv"
             android:layout_width="115dp"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:textAlignment="textStart"
             android:text="Tanggal"
-            android:textColor="#000" />
+            android:textColor="#000"
+            android:textSize="15dp"/>
+
+        <TextView
+            android:layout_width="5dp"
+            android:layout_height="match_parent"
+            android:text=":"
+            android:gravity="center"
+            android:textColor="#000"
+            android:textSize="15dp"/>
 
         <EditText
             android:id="@+id/tanggal_et"
-            android:layout_width="356dp"
+            android:layout_width="130dp"
+            android:layout_height="match_parent"
+            android:hint="tanggal"/>
+
+        <Button
+            android:layout_width="50dp"
             android:layout_height="wrap_content"
-            android:hint="tanggal" />
+            android:background="@drawable/ic_date_range_black_24dp"/>
 
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp">
 
         <TextView
             android:id="@+id/mulai_tv"
             android:layout_width="115dp"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:textAlignment="textStart"
             android:text="Jam Mulai"
-            android:textColor="#000" />
+            android:textColor="#000"
+            android:textSize="15dp"/>
+
+        <TextView
+            android:layout_width="5dp"
+            android:layout_height="match_parent"
+            android:text=":"
+            android:gravity="center"
+            android:textColor="#000"
+            android:textSize="15dp"/>
 
         <EditText
             android:id="@+id/mulai_et"
-            android:layout_width="290dp"
-            android:layout_height="wrap_content"
-            android:hint="mulai" />
+            android:layout_width="180dp"
+            android:layout_height="match_parent"
+            android:hint="mulai"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp">
 
         <TextView
             android:id="@+id/akhir_tv"
             android:layout_width="115dp"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:textAlignment="textStart"
             android:text="Jam Akhir"
-            android:textColor="#000" />
+            android:textColor="#000"
+            android:textSize="15dp"/>
+
+        <TextView
+            android:layout_width="5dp"
+            android:layout_height="match_parent"
+            android:text=":"
+            android:gravity="center"
+            android:textColor="#000"
+            android:textSize="15dp"/>
 
         <EditText
             android:id="@+id/akhir_et"
-            android:layout_width="304dp"
-            android:layout_height="wrap_content"
+            android:layout_width="180dp"
+            android:layout_height="match_parent"
             android:hint="akhir" />
 
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp">
+
+        <Button
+            android:id="@+id/cancel"
+            android:layout_width="90dp"
+            android:layout_height="wrap_content"
+            android:text="CANCEL"
+            android:background="#edd60d"/>
 
         <Button
             android:id="@+id/save"
-            android:layout_width="192dp"
+            android:layout_width="90dp"
+            android:layout_marginStart="120dp"
             android:layout_height="wrap_content"
-            android:text="SAVE" />
-        <Button
-            android:id="@+id/cancel"
-            android:layout_width="192dp"
-            android:layout_height="wrap_content"
-            android:text="CANCEL" />
+            android:text="SAVE"
+            android:background="#edd60d"/>
+
+
     </LinearLayout>
 
 </LinearLayout>
