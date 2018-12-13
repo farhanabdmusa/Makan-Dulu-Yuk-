@@ -78,9 +78,12 @@ public class LoginActivity extends AppCompatActivity {
 
                                     try {
                                         JSONObject obj = new JSONObject(response);
-                                        JSONArray userDetail = obj.getJSONArray("result");
+
+                                        System.out.println("Login result : " + obj.getString(Config.JSON_RESPONSE)
+                                        .equals("Success"));
 
                                         if (obj.getString(Config.JSON_RESPONSE).equals("Success")){
+                                            JSONArray userDetail = obj.getJSONArray("result");
                                             Toast.makeText(LoginActivity.this, obj.getString("response"), Toast.LENGTH_SHORT).show();
                                             User user = new User();
                                             user.setNama(userDetail.getJSONObject(0).getString(Config.NAME));
@@ -98,13 +101,14 @@ public class LoginActivity extends AppCompatActivity {
                                         }
                                     } catch (JSONException e) {
                                         e.printStackTrace();
+                                        loginButton.setEnabled(true);
                                     }
                                 }
                             },
                             new Response.ErrorListener() {
                                 @Override
                                 public void onErrorResponse(VolleyError error) {
-
+                                    loginButton.setEnabled(true);
                                 }
                             }){
                         @Override
