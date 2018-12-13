@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -29,6 +30,8 @@ public class LoginActivity extends AppCompatActivity {
 
     private EditText username, password;
     private Button loginButton;
+    private TextView lupaPassword;
+    private TextView daftar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,6 +116,32 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         });
+        /*
+        lupaPassword = (TextView) findViewById(R.id.lupa_password);
+        //lupa password
+        lupaPassword.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                //ke activity lupa password
+            }
+        });
+        */
 
+        daftar = (TextView) findViewById(R.id.daftar);
+        //intent ke activity daftar
+        daftar.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                registrationAvtivity();
+                return true;
+            }
+        });
+
+
+    }
+
+    public void registrationAvtivity() {
+        Intent intent = new Intent(this, RegisterActivity.class);
+        startActivity(intent);
     }
 }
