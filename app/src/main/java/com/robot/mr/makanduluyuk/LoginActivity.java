@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -116,28 +117,28 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         });
-        /*
-        lupaPassword = (TextView) findViewById(R.id.lupa_password);
-        //lupa password
-        lupaPassword.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                //ke activity lupa password
-            }
-        });
-        */
 
-        daftar = (TextView) findViewById(R.id.daftar);
-        //intent ke activity daftar
-        daftar.setOnLongClickListener(new View.OnLongClickListener() {
+        lupaPassword = findViewById(R.id.lupa_password);
+        //lupa password
+        lupaPassword.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public boolean onLongClick(View v) {
-                registrationAvtivity();
+            public boolean onTouch(View v, MotionEvent event) {
+                //kode
                 return true;
             }
         });
 
 
+
+        daftar = findViewById(R.id.daftar);
+        //intent ke activity daftar
+        daftar.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                registrationAvtivity();
+                return true;
+            }
+        });
     }
 
     public void registrationAvtivity() {
