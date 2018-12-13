@@ -1,64 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@mipmap/background_login"
+    android:gravity="center"
+    android:orientation="vertical"
     tools:context=".LoginActivity">
 
-    <TextView
-        android:id="@+id/username_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Username"
-        android:textColor="#000"
-        />
+    <ImageView
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:layout_marginTop="50dp"
+        android:src="@mipmap/logo_login" />
+
 
     <EditText
         android:id="@+id/username"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/shape_input_login"
+        android:drawableLeft="@drawable/ic_person_outline_black_24dp"
+        android:drawablePadding="7dp"
         android:hint="Username"
+<<<<<<< HEAD
         android:inputType="textEmailAddress"
         android:layout_below="@id/username_tv"/>
+=======
+        android:padding="10dp"
+        android:textSize="17dp" />
+>>>>>>> fc93d4a746d15a0d0a59af2ad9ecee94a58ff0cb
 
-    <TextView
-        android:id="@+id/password_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Password"
-        android:layout_below="@id/username"
-        android:textColor="#000"/>
 
     <EditText
         android:id="@+id/password"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/shape_input_login"
+        android:drawableLeft="@drawable/ic_lock_outline_black_24dp"
+        android:drawablePadding="7dp"
         android:hint="Password"
+<<<<<<< HEAD
         android:inputType="textPassword"
         android:layout_below="@id/password_tv"/>
+=======
+        android:padding="10dp"
+        android:textSize="17dp"
+        android:inputType="textPassword"/>
+
+    <TextView
+        android:id="@+id/lupa_password"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/login"
+        android:layout_marginTop="10dp"
+        android:gravity="right"
+        android:text="Lupa Password?"
+        android:textSize="13dp" />
+
+>>>>>>> fc93d4a746d15a0d0a59af2ad9ecee94a58ff0cb
 
     <Button
         android:id="@+id/login"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Login"
-        android:layout_below="@id/password"/>
-
-    <Button
-        android:id="@+id/registerButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_below="@id/password"
         android:layout_marginTop="20dp"
-        android:text="Register"
-        android:layout_below="@id/login"/>
+        android:background="#ff7d4b"
+        android:text="Login"
+        android:textSize="17dp"/>
+
+    <TextView
+        android:id="@+id/daftar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/login"
+        android:layout_marginTop="20dp"
+        android:gravity="left"
+        android:text="Daftar di sini"
+        android:textStyle="bold"
+        android:textSize="15dp"/>
+
 
     <ProgressBar
-    android:visibility="gone"
-    android:id="@+id/progressBar"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_centerHorizontal="true"
-    android:layout_centerVertical="true" />
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:visibility="gone" />
 
-</RelativeLayout>
+</LinearLayout>

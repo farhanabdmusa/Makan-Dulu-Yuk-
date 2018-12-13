@@ -4,10 +4,12 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -29,6 +31,8 @@ public class LoginActivity extends AppCompatActivity {
 
     private EditText username, password;
     private Button loginButton;
+    private TextView lupaPassword;
+    private TextView daftar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -114,5 +118,31 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        lupaPassword = findViewById(R.id.lupa_password);
+        //lupa password
+        lupaPassword.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                //kode
+                return true;
+            }
+        });
+
+
+
+        daftar = findViewById(R.id.daftar);
+        //intent ke activity daftar
+        daftar.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                registrationAvtivity();
+                return true;
+            }
+        });
+    }
+
+    public void registrationAvtivity() {
+        Intent intent = new Intent(this, RegisterActivity.class);
+        startActivity(intent);
     }
 }
