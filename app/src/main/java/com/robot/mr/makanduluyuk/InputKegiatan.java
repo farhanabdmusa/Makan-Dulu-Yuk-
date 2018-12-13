@@ -9,7 +9,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -46,28 +45,36 @@ public class InputKegiatan extends AppCompatActivity {
             }
         });
 
-        final EditText eMulai = (EditText) findViewById(R.id.mulai_et);
+        final EditText eMulai =  findViewById(R.id.mulai_et);
         eMulai.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 TimePickerDialog timePickerDialog = new TimePickerDialog(InputKegiatan.this, new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker timePicker, int hourOfDay, int minutes) {
-                        eMulai.setText(hourOfDay+":"+minutes);
+                        if(minutes < 10){
+                            eMulai.setText(hourOfDay+":0"+minutes);
+                        } else {
+                            eMulai.setText(hourOfDay+":"+minutes);
+                        }
                     }
                 }, 0, 0, true);
                 timePickerDialog.show();
             }
         });
 
-        final EditText eAkhir = (EditText) findViewById(R.id.akhir_et);
+        final EditText eAkhir = findViewById(R.id.akhir_et);
         eAkhir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 TimePickerDialog timePickerDialog = new TimePickerDialog(InputKegiatan.this, new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker timePicker, int hourOfDay, int minutes) {
-                        eAkhir.setText(hourOfDay+":"+minutes);
+                        if(minutes < 10){
+                            eAkhir.setText(hourOfDay+":0"+minutes);
+                        } else {
+                            eAkhir.setText(hourOfDay+":"+minutes);
+                        }
                     }
                 }, 0, 0, true);
                 timePickerDialog.show();
@@ -106,6 +113,7 @@ public class InputKegiatan extends AppCompatActivity {
                             eAkhir.getText().toString());
                     if(isInserted){
                         Toast.makeText(InputKegiatan.this, "Data telah disimpan", Toast.LENGTH_LONG).show();
+                        finish();
                     } else{
                         Toast.makeText(InputKegiatan.this, "Data tidak tersimpan", Toast.LENGTH_LONG).show();
                     }
