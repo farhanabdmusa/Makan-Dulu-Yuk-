@@ -51,7 +51,7 @@ public class TabFragmentBesok extends Fragment {
         mNama.clear();
         mJamWal.clear();
         mJamKhir.clear();
-        Cursor res = myDB.getAllData();
+        Cursor res = myDB.getDataBesok();
         StringBuffer buffer = new StringBuffer();
         while (res.moveToNext()){
             mNama.add(res.getString(1));
