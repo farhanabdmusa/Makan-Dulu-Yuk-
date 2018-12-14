@@ -45,7 +45,6 @@ import java.util.regex.Pattern;
 
 
      private static final String TAG = "RegisterActivity";
-     private static final String URL_FOR_REGISTRATION = "https://XXX.XXX.X.XX/android_login_example/register.php";
      ProgressDialog progressDialog;
     
 
@@ -170,7 +169,7 @@ import java.util.regex.Pattern;
         progressDialog.setMessage("Adding you ...");
         showDialog();
         StringRequest strReq = new StringRequest(Request.Method.POST,
-                URL_FOR_REGISTRATION, new Response.Listener<String>() {
+                Config.REGISTRATION_URL, new Response.Listener<String>() {
 
             @Override
             public void onResponse(String response) {

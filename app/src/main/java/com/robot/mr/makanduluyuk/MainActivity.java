@@ -50,6 +50,9 @@ public class MainActivity extends AppCompatActivity {
     private void initKegiatan(){
         Log.d(TAG, "initKegiatan: preparing bitmaps");
 
+        mNama.clear();
+        mJamWal.clear();
+        mJamKhir.clear();
         Cursor res = myDB.getAllData();
         StringBuffer buffer = new StringBuffer();
         while (res.moveToNext()){
