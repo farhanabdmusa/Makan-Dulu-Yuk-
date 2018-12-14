@@ -1,16 +1,22 @@
 package com.robot.mr.makanduluyuk;
 
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.database.Cursor;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 
 import java.util.ArrayList;
+
+import static android.app.Notification.EXTRA_NOTIFICATION_ID;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -36,6 +42,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 openActivityAgung();
+            }
+        });
+
+        AppCompatButton notif = findViewById(R.id.notifButton);
+        notif.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                notificationCall();
             }
         });
 
@@ -85,5 +99,29 @@ public class MainActivity extends AppCompatActivity {
     public void openActivityAgung(){
         Intent intent = new Intent(MainActivity.this, InputKegiatan.class);
         startActivity(intent);
+    }
+
+    public void notificationCall(){
+        Intent intent = new Intent(this, InputKegiatan.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+
+        Intent snoozeIntent = new Intent(this, InputKegiatan.class);
+        snoozeIntent.setAction(Intent.ACTION_WEB_SEARCH);
+        snoozeIntent.putExtra(EXTRA_NOTIFICATION_ID, 0);
+
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
+
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this)
+                .setDefaults(NotificationCompat.DEFAULT_ALL)
+                .setContentTitle("Hallo, im notification")
+                .setContentText("Click Me!")
+                .setAutoCancel(true)
+                .setSmallIcon(R.drawable.ic_person_outline_black_24dp)
+                // Set the intent that will fire when the user taps the notification
+                .addAction(R.drawable.ic_date_range_black_24dp, "SNOOZE", pendingIntent)
+                .setContentIntent(pendingIntent);
+
+        NotificationManager notificationManager = (NotificationManager) getSystemService(this.NOTIFICATION_SERVICE);
+        notificationManager.notify(1, builder.build());
     }
 }
