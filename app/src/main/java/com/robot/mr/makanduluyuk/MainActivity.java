@@ -99,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void notificationCall(){
-        Intent intent = new Intent(this, InputKegiatan.class);
+        Intent intent = new Intent(this, MapsActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
         Intent snoozeIntent = new Intent(this, InputKegiatan.class);
