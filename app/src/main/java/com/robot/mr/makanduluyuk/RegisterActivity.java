@@ -19,11 +19,13 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
@@ -63,6 +65,10 @@ import java.util.regex.Pattern;
         dateOfBirth = findViewById(R.id.dateEditText);
         register = findViewById(R.id.daftarButton);
 
+        // Progress dialog
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setCancelable(false);
+
         dateCalendar.setOnClickListener(new View.OnClickListener(){
 
             @Override
@@ -86,10 +92,16 @@ import java.util.regex.Pattern;
         cal.set(Calendar.YEAR,year);
         cal.set(Calendar.MONTH,month);
         cal.set(Calendar.DAY_OF_MONTH,dayOfMonth);
+        /*
         String birthDateFormat = DateFormat.getDateInstance().format(cal.getTime());
+        */
+
+        SimpleDateFormat dateFormat= new SimpleDateFormat("yyyy-MM-dd");
+        String strDate = dateFormat.format(cal.getTime());
 
         EditText tanggalLahir = (EditText) findViewById(R.id.dateEditText);
-        tanggalLahir.setText(birthDateFormat);
+        tanggalLahir.setText(strDate);
+
     }
 
     private static boolean isValidPassword(final String password) {
@@ -139,9 +151,9 @@ import java.util.regex.Pattern;
         int selectedId = gender.getCheckedRadioButtonId();
         String userGender;
         if(selectedId == R.id.female_radio_btn)
-            userGender = "Female";
+            userGender = "P";
         else
-            userGender = "Male";
+            userGender = "L";
 
 
         if (dateOfBirth.getText().toString().isEmpty()){
@@ -158,19 +170,12 @@ import java.util.regex.Pattern;
 
     private void registerUser(final String name, final String username, final String password, final String gender, final String dob) {
 
-        /*
-        String data = name + " | " + username + " | " + password + " | " + gender + " | " + dob;
-        Toast.makeText(this, data, Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(this, LoginActivity.class);
-        intent.putExtra("dataUser",data);
-        startActivity(intent);
-        */
         String cancel_req_tag = "register";
 
         progressDialog.setMessage("Adding you ...");
         showDialog();
         StringRequest strReq = new StringRequest(Request.Method.POST,
-                URL_FOR_REGISTRATION, new Response.Listener<String>() {
+                Config.REGISTER_URL, new Response.Listener<String>() {
 
             @Override
             public void onResponse(String response) {
@@ -178,27 +183,25 @@ import java.util.regex.Pattern;
                 hideDialog();
 
                 try {
-                    JSONObject jObj = new JSONObject(response);
-                    boolean error = jObj.getBoolean("error");
+                    JSONObject obj = new JSONObject(response);
+                    System.out.println("Register result : " + obj.getString(Config.JSON_RESPONSE)
+                            .equals("Success"));
 
-                    if (!error) {
-                        String user = jObj.getJSONObject("user").getString("name");
+                    if (obj.getString(Config.JSON_RESPONSE).equals("Success")) {
+                        String user = obj.getJSONObject("user").getString("name");
                         Toast.makeText(getApplicationContext(), "Hi " + user +", You are successfully Added!", Toast.LENGTH_SHORT).show();
 
                         // Launch login activity
-                        Intent intent = new Intent(
-                                RegisterActivity.this,
-                                LoginActivity.class);
-                        startActivity(intent);
                         finish();
                     } else {
 
-                        String errorMsg = jObj.getString("error_msg");
+                        String errorMsg = obj.getString("error_msg");
                         Toast.makeText(getApplicationContext(),
                                 errorMsg, Toast.LENGTH_LONG).show();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    Log.i("register","register error");
                 }
 
             }
@@ -216,16 +219,17 @@ import java.util.regex.Pattern;
             protected Map<String, String> getParams() {
                 // Posting params to register url
                 Map<String, String> params = new HashMap<String, String>();
-                params.put("name", name);
-                params.put("email", username);
-                params.put("password", password);
-                params.put("gender", gender);
-                params.put("age", dob);
+                params.put(Config.NAME, name);
+                params.put(Config.USERNAME, username);
+                params.put(Config.PASSWORD, password);
+                params.put(Config.JENIS_KELAMIN, gender);
+                params.put(Config.DOB, dob);
                 return params;
             }
         };
         // Adding request to request queue
-       AppSingleton.getInstance(getApplicationContext()).addToRequestQueue(strReq, cancel_req_tag);
+       //AppSingleton.getInstance(getApplicationContext()).addToRequestQueue(strReq, cancel_req_tag);
+        Volley.newRequestQueue(RegisterActivity.this).add(strReq);
     }
 
      private void showDialog() {
