@@ -73,6 +73,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return res;
     }
 
+
 //    db.rawQuery("select * from " + TABLE_NAME + "where " +" order by "+ COL_4 +" asc", null);
 
 //    public Cursor sortData(){
