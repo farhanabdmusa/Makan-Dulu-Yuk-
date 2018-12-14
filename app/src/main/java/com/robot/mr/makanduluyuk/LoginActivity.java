@@ -43,7 +43,7 @@ public class LoginActivity extends AppCompatActivity {
 
         if(sessionManager.checkLogin()){
             finish();
-            Intent intent = new Intent(this, MainActivity.class);
+            Intent intent = new Intent(this, NavigationDrawer.class);
             startActivity(intent);
         }
 
@@ -92,7 +92,7 @@ public class LoginActivity extends AppCompatActivity {
                                             sessionManager.createLoginSession(user.getNama(), user.getDob(), user.getJenisKelamin());
                                             Toast.makeText(LoginActivity.this, obj.getJSONArray("result").getString(0), Toast.LENGTH_SHORT).show();
                                             finish();
-                                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                            Intent intent = new Intent(LoginActivity.this, NavigationDrawer.class);
                                             startActivity(intent);
                                         } else{
                                             Toast.makeText(LoginActivity.this, obj.getString("response"), Toast.LENGTH_SHORT)
