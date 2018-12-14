@@ -159,7 +159,6 @@ public class InputKegiatan extends AppCompatActivity {
         int day = cldr.get(Calendar.DAY_OF_MONTH);
         int month = cldr.get(Calendar.MONTH);
         int year = cldr.get(Calendar.YEAR);
-        // date picker dialog
         DatePickerDialog picker = new DatePickerDialog(InputKegiatan.this,
                 new DatePickerDialog.OnDateSetListener() {
                     @Override
@@ -168,13 +167,9 @@ public class InputKegiatan extends AppCompatActivity {
                     }
                 }, year, month, day);
         picker.show();
-//        startAlarm(cldr);
     };
 
     private void startAlarm(Calendar c){
-        Intent intentMap = new Intent(this, MapsActivity.class);
-        intentMap.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-
         AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(this, AlertReceiver.class);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 1, intent, 0);
