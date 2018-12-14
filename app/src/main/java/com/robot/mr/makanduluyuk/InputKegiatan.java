@@ -172,6 +172,9 @@ public class InputKegiatan extends AppCompatActivity {
     };
 
     private void startAlarm(Calendar c){
+        Intent intentMap = new Intent(this, MapsActivity.class);
+        intentMap.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+
         AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(this, AlertReceiver.class);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 1, intent, 0);

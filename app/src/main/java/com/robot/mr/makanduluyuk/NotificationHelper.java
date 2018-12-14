@@ -4,8 +4,10 @@ import android.annotation.TargetApi;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.ContextWrapper;
+import android.content.Intent;
 import android.os.Build;
 import android.support.v4.app.NotificationCompat;
 
@@ -44,11 +46,16 @@ public class NotificationHelper extends ContextWrapper {
     }
 
     public NotificationCompat.Builder getChannel1Notification(){
+        Intent intent = new Intent(this, MapsActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
         return new NotificationCompat.Builder(getApplicationContext(),channel1ID)
                 .setDefaults(NotificationCompat.DEFAULT_ALL)
                 .setContentTitle("Eat Reminder!")
                 .setContentText("Time to eat!")
                 .setAutoCancel(true)
-                .setSmallIcon(R.drawable.ic_person_outline_black_24dp);
+                .setSmallIcon(R.drawable.ic_person_outline_black_24dp)
+                .setContentIntent(pendingIntent);
     }
 }
