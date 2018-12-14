@@ -2,8 +2,8 @@ package com.robot.mr.makanduluyuk;
 
 public class Config {
 
-    public static final String LOGIN_URL = "https://a0ab988c.ngrok.io/mdy/users/login";
-    public static final String REGISTER_URL = "https://a0ab988c.ngrok.io/mdy/users/register";
+    public static final String LOGIN_URL = "https://f2d09bb4.ngrok.io/webservice-mdy-master/users/login";
+    public static final String REGISTRATION_URL = "https://a0ab988c.ngrok.io/users/register";
 
     public static final String JSON_RESPONSE = "response";
 

@@ -47,7 +47,6 @@ import java.util.regex.Pattern;
 
 
      private static final String TAG = "RegisterActivity";
-     private static final String URL_FOR_REGISTRATION = "https://XXX.XXX.X.XX/android_login_example/register.php";
      ProgressDialog progressDialog;
     
 
@@ -99,7 +98,7 @@ import java.util.regex.Pattern;
         SimpleDateFormat dateFormat= new SimpleDateFormat("yyyy-MM-dd");
         String strDate = dateFormat.format(cal.getTime());
 
-        EditText tanggalLahir = (EditText) findViewById(R.id.dateEditText);
+        EditText tanggalLahir = findViewById(R.id.dateEditText);
         tanggalLahir.setText(strDate);
 
     }
@@ -138,13 +137,13 @@ import java.util.regex.Pattern;
             Toast.makeText(this, "Password minimal 6 karakter", Toast.LENGTH_SHORT).show();
             return;
         }else if (!isValidPassword(password.getText().toString())) {
-            Toast.makeText(this, "Password tidak valid", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Password harus berisi huruf besar dan kecil, angka, dan karakter spesial", Toast.LENGTH_SHORT).show();
 
             return;
         }
 
         if (!confirmPassword.getText().toString().equals(password.getText().toString())){
-            Toast.makeText(this, "Password tidak sesuai", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Konfirmasi password salah", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -175,7 +174,7 @@ import java.util.regex.Pattern;
         progressDialog.setMessage("Adding you ...");
         showDialog();
         StringRequest strReq = new StringRequest(Request.Method.POST,
-                Config.REGISTER_URL, new Response.Listener<String>() {
+                Config.REGISTRATION_URL, new Response.Listener<String>() {
 
             @Override
             public void onResponse(String response) {
