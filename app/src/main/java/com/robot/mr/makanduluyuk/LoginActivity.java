@@ -126,23 +126,20 @@ public class LoginActivity extends AppCompatActivity {
 
         lupaPassword = findViewById(R.id.lupa_password);
         //lupa password
-        lupaPassword.setOnTouchListener(new View.OnTouchListener() {
+        /*lupaPassword.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 //kode
                 return true;
             }
-        });
+        });*/
 
 
 
-        daftar = findViewById(R.id.daftar);
-        //intent ke activity daftar
-        daftar.setOnTouchListener(new View.OnTouchListener() {
+        findViewById(R.id.daftar).setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onTouch(View v, MotionEvent event) {
+            public void onClick(View v) {
                 registrationAvtivity();
-                return true;
             }
         });
     }
