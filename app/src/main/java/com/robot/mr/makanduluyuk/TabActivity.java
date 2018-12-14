@@ -131,7 +131,8 @@ public class TabActivity extends AppCompatActivity {
                     return "Besok";
                 case 2:
                     return "Kemarin";
-
+                default:
+                    return null;
             }
         }
     }
