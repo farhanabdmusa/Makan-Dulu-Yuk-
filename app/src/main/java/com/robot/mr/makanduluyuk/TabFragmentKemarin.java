@@ -41,9 +41,9 @@ public class TabFragmentKemarin extends Fragment {
 
 
     @Override
-    public void onResume() {
-        super.onResume();
-        initKegiatan(rootView);
+    public void onStart() {
+        super.onStart();
+        initKegiatan();
     }
 
     @Override
@@ -51,38 +51,18 @@ public class TabFragmentKemarin extends Fragment {
         super.onViewCreated(view, savedInstanceState);
     }
 
-    private void initKegiatan(View rootView){
+    private void initKegiatan(){
         Log.d(TAG, "initKegiatan: preparing bitmaps");
 
         mNama.clear();
         mJamWal.clear();
         mJamKhir.clear();
-        Cursor res = myDB.getAllData();
+        Cursor res = myDB.getDataKemarin();
         StringBuffer buffer = new StringBuffer();
         while (res.moveToNext()){
             mNama.add(res.getString(1));
             mJamWal.add(res.getString(3));
             mJamKhir.add(res.getString(4));
         }
-
-//        mNama.add("Kegiatan 1");
-//        mNama.add("Kegiatan 2");
-//        mNama.add("Kegiatan 3");
-//        mNama.add("Kegiatan 4");
-//        mNama.add("Kegiatan 5");
-//        mNama.add("Kegiatan 6");
-//        mNama.add("Kegiatan 7");
-//        mNama.add("Kegiatan 8");
-//        mNama.add("Kegiatan 9");
-
-//        initRecyclerView(rootView);
     }
-
-    /*private void initRecyclerView(View rootView){
-        Log.d(TAG, "initRecyclerView: init recyclerview.");
-        RecyclerView recyclerView = rootView.findViewById(R.id.recycler_view);
-        RecyclerViewAdapter adapter = new RecyclerViewAdapter(TabFragmentKemarin.class, mNama, mJamWal, mJamKhir);
-        recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-    }*/
 }

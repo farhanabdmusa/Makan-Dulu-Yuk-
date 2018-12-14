@@ -129,17 +129,13 @@ public class NavigationDrawer extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        if (id == R.id.nav_profile) {
 
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
+        } else if (id == R.id.nav_logout) {
+            SessionManager sessionManager = new SessionManager(getApplicationContext());
+            sessionManager.logout();
+            finish();
+        } else if (id == R.id.nav_map){
 
         }
 
@@ -159,14 +155,17 @@ public class NavigationDrawer extends AppCompatActivity
 
             switch (position) {
                 case 0:
-                    TabFragmentSekarang fragmentSekarang = new TabFragmentSekarang();
-                    return fragmentSekarang;
-                case 1:
-                    TabFragmentBesok fragmentBesok= new TabFragmentBesok();
-                    return fragmentBesok;
-                case 2:
+                    System.out.println("Kemarin");
                     TabFragmentKemarin fragmentKemarin = new TabFragmentKemarin();
                     return fragmentKemarin;
+                case 1:
+                    System.out.println("Sekarang");
+                    TabFragmentSekarang fragmentSekarang = new TabFragmentSekarang();
+                    return fragmentSekarang;
+                case 2:
+                    System.out.println("Besok");
+                    TabFragmentBesok fragmentBesok = new TabFragmentBesok();
+                    return fragmentBesok;
                 default:
                     return null;
             }

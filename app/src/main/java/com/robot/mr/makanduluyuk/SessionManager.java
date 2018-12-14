@@ -1,13 +1,15 @@
 package com.robot.mr.makanduluyuk;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.support.v7.app.AppCompatActivity;
 
 import com.android.volley.toolbox.StringRequest;
 
 import java.util.HashMap;
 
-public class SessionManager {
+public class SessionManager extends AppCompatActivity {
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
     Context context;
@@ -42,5 +44,18 @@ public class SessionManager {
     public boolean checkLogin(){
         if (!this.sharedPreferences.getBoolean(LOGIN, false)) return false;
         else return true;
+    }
+
+    public void logout(){
+        sharedPreferences = context.getSharedPreferences(PREF_NAME, PRIVATE_MODE);
+        editor = sharedPreferences.edit();
+        editor.clear();
+        editor.commit();
+
+        Intent intent = new Intent(context, LoginActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.setFlags(intent.FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity(intent);
+        finish();
     }
 }

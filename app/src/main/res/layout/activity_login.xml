@@ -25,7 +25,7 @@
         android:drawableStart="@drawable/ic_person_outline_black_24dp"
         android:drawablePadding="7dp"
         android:hint="Username"
-        android:inputType="textEmailAddress"
+        android:inputType="textShortMessage"
         android:padding="10dp"
         android:textSize="17sp" />
 

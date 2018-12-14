@@ -52,9 +52,14 @@ public class TabFragmentSekarang extends Fragment {
 
 
     @Override
-    public void onResume() {
-        super.onResume();
+    public void onStart() {
+        super.onStart();
         initKegiatan();
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
     }
 
     private void initKegiatan(){
@@ -71,12 +76,5 @@ public class TabFragmentSekarang extends Fragment {
             mJamKhir.add(res.getString(4));
         }
 
-    }
-
-
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
     }
 }
