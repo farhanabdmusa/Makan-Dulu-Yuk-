@@ -21,7 +21,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("create table " + TABLE_NAME + " (ID INTEGER PRIMARY KEY AUTOINCREMENT,KEGIATAN TEXT,TANGGAL STRFTIME,JAM_MULAI TEXT,JAM_AKHIR TEXT)");
+        db.execSQL("create table " + TABLE_NAME + " (ID INTEGER PRIMARY KEY AUTOINCREMENT,KEGIATAN TEXT,TANGGAL TEXT,JAM_MULAI TEXT,JAM_AKHIR TEXT)");
     }
 
     @Override
@@ -47,7 +47,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public Cursor getAllData(){
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor res = db.rawQuery("select * from " + TABLE_NAME +" order by "+ COL_4 +" asc", null);
+        Cursor res = db.rawQuery("select *" +
+                                      " from " + TABLE_NAME +
+                                      " where "+ COL_3 + " IN (select strftime('%d/%m/%Y','now'))" +
+                                      " order by " + COL_4 + " asc", null);
         return res;
     }
 
