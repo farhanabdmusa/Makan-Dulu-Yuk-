@@ -3,14 +3,10 @@
     <string name="sign_up"><u>Sign Up</u></string>
     <string name="title_activity_maps">Map</string>
     <string name="title_activity_tab">TabActivity</string>
-    <string name="tab_text_1">Tab 1</string>
-    <string name="tab_text_2">Tab 2</string>
-    <string name="tab_text_3">Tab 3</string>
+    <string name="tab_text_1">Kemarin</string>
+    <string name="tab_text_2">Hari ini</string>
+    <string name="tab_text_3">Besok</string>
     <string name="action_settings">Settings</string>
-<<<<<<< HEAD
-    <string name="section_format">Hello World from section: %1$d</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_navigation_drawer">NavigationDrawer</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
@@ -18,8 +14,4 @@
     <string name="nav_header_title">Android Studio</string>
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
-=======
-    <string name="section_format">Hello World from section:</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
->>>>>>> 3ac07c6e841e0fd5378f3356e1d3dd8b7ac55f22
 </resources>

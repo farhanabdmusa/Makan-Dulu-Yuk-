@@ -22,11 +22,12 @@ public class TabFragmentKemarin extends Fragment {
     private ArrayList<String> mNama = new ArrayList<>();
     private ArrayList<String> mJamWal = new ArrayList<>();
     private ArrayList<String> mJamKhir = new ArrayList<>();
+    View rootView;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_sekarang_tab, container, false);
+        rootView = inflater.inflate(R.layout.fragment_sekarang_tab, container, false);
         myDB = new DatabaseHelper(getContext());
 
         RecyclerView recyclerView = rootView.findViewById(R.id.recycler_view_sekarang);
@@ -42,7 +43,7 @@ public class TabFragmentKemarin extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        initKegiatan();
+        initKegiatan(rootView);
     }
 
     @Override
@@ -50,13 +51,13 @@ public class TabFragmentKemarin extends Fragment {
         super.onViewCreated(view, savedInstanceState);
     }
 
-    private void initKegiatan(){
+    private void initKegiatan(View rootView){
         Log.d(TAG, "initKegiatan: preparing bitmaps");
 
         mNama.clear();
         mJamWal.clear();
         mJamKhir.clear();
-        Cursor res = myDB.getDataKemarin();
+        Cursor res = myDB.getAllData();
         StringBuffer buffer = new StringBuffer();
         while (res.moveToNext()){
             mNama.add(res.getString(1));
@@ -74,14 +75,14 @@ public class TabFragmentKemarin extends Fragment {
 //        mNama.add("Kegiatan 8");
 //        mNama.add("Kegiatan 9");
 
-        initRecyclerView();
+//        initRecyclerView(rootView);
     }
 
-    private void initRecyclerView(){
+    /*private void initRecyclerView(View rootView){
         Log.d(TAG, "initRecyclerView: init recyclerview.");
-        RecyclerView recyclerView = findViewById(R.id.recycler_view);
-        RecyclerViewAdapter adapter = new RecyclerViewAdapter(MainActivity.this, mNama, mJamWal, mJamKhir);
+        RecyclerView recyclerView = rootView.findViewById(R.id.recycler_view);
+        RecyclerViewAdapter adapter = new RecyclerViewAdapter(TabFragmentKemarin.class, mNama, mJamWal, mJamKhir);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-    }
+    }*/
 }
