@@ -137,13 +137,13 @@ import java.util.regex.Pattern;
             Toast.makeText(this, "Password minimal 6 karakter", Toast.LENGTH_SHORT).show();
             return;
         }else if (!isValidPassword(password.getText().toString())) {
-            Toast.makeText(this, "Password tidak valid", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Password harus berisi huruf besar dan kecil, angka, dan karakter spesial", Toast.LENGTH_SHORT).show();
 
             return;
         }
 
         if (!confirmPassword.getText().toString().equals(password.getText().toString())){
-            Toast.makeText(this, "Password tidak sesuai", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Konfirmasi password salah", Toast.LENGTH_SHORT).show();
             return;
         }
 
