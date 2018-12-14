@@ -45,12 +45,22 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
-    public Cursor getAllData(){
+    public Cursor getDataSekarang(){
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor res = db.rawQuery("select *" +
                                       " from " + TABLE_NAME +
-                                      " where "+ COL_3 + " IN (select strftime('%d/%m/%Y','now'))" +
+                                      " where "+ COL_3 + " IN (select strftime('%d/%m/%Y','now','+1 day'))" +
                                       " order by " + COL_4 + " asc", null);
+        return res;
+    }
+
+
+    public Cursor getDataKemarin(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor res = db.rawQuery("select *" +
+                " from " + TABLE_NAME +
+                " where "+ COL_3 + " IN (select strftime('%d/%m/%Y','now'))" +
+                " order by " + COL_4 + " asc", null);
         return res;
     }
 
@@ -58,18 +68,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor res = db.rawQuery("select *" +
                 " from " + TABLE_NAME +
-                " where "+ COL_3 + " IN (select strftime('%d/%m/%Y','now','+2 day'))" +
+                " where "+ COL_3 + " IN (select strftime('%d/%m/%Y','now', '+2 day'))" +
                 " order by " + COL_4 + " asc", null);
         return res;
     }
-    public Cursor getDataKemarin(){
-        SQLiteDatabase db = this.getWritableDatabase();
-        Cursor res = db.rawQuery("select *" +
-                " from " + TABLE_NAME +
-                " where "+ COL_3 + " IN (select strftime('%d/%m/%Y','now','day'))" +
-                " order by " + COL_4 + " asc", null);
-        return res;
-    }
+
 
 //    db.rawQuery("select * from " + TABLE_NAME + "where " +" order by "+ COL_4 +" asc", null);
 
