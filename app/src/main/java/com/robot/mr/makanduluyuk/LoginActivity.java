@@ -43,7 +43,11 @@ public class LoginActivity extends AppCompatActivity {
 
         if(sessionManager.checkLogin()){
             finish();
+<<<<<<< HEAD
             Intent intent = new Intent(this, NavigationDrawer.class);
+=======
+            Intent intent = new Intent(this, TabActivity.class);
+>>>>>>> 3ac07c6e841e0fd5378f3356e1d3dd8b7ac55f22
             startActivity(intent);
         }
 
@@ -92,7 +96,11 @@ public class LoginActivity extends AppCompatActivity {
                                             sessionManager.createLoginSession(user.getNama(), user.getDob(), user.getJenisKelamin());
                                             Toast.makeText(LoginActivity.this, obj.getJSONArray("result").getString(0), Toast.LENGTH_SHORT).show();
                                             finish();
+<<<<<<< HEAD
                                             Intent intent = new Intent(LoginActivity.this, NavigationDrawer.class);
+=======
+                                            Intent intent = new Intent(LoginActivity.this, TabActivity.class);
+>>>>>>> 3ac07c6e841e0fd5378f3356e1d3dd8b7ac55f22
                                             startActivity(intent);
                                         } else{
                                             Toast.makeText(LoginActivity.this, obj.getString("response"), Toast.LENGTH_SHORT)
