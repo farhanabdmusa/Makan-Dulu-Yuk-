@@ -1,10 +1,14 @@
 package com.robot.mr.makanduluyuk;
 
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.NotificationCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -15,6 +19,9 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+
+import static android.app.Notification.EXTRA_NOTIFICATION_ID;
+import static android.content.Context.NOTIFICATION_SERVICE;
 
 public class TabFragmentSekarang extends Fragment {
 
@@ -56,7 +63,7 @@ public class TabFragmentSekarang extends Fragment {
         mNama.clear();
         mJamWal.clear();
         mJamKhir.clear();
-        Cursor res = myDB.getAllData();
+        Cursor res = myDB.getDataSekarang();
         StringBuffer buffer = new StringBuffer();
         while (res.moveToNext()){
             mNama.add(res.getString(1));
@@ -65,6 +72,7 @@ public class TabFragmentSekarang extends Fragment {
         }
 
     }
+
 
 
     @Override

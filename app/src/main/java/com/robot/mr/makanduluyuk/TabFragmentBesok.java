@@ -26,10 +26,10 @@ public class TabFragmentBesok extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_sekarang_tab, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_besok_tab, container, false);
         myDB = new DatabaseHelper(getContext());
 
-        RecyclerView recyclerView = rootView.findViewById(R.id.recycler_view_sekarang);
+        RecyclerView recyclerView = rootView.findViewById(R.id.recycler_view_besok);
         recyclerView.setHasFixedSize(true);
         RecyclerViewAdapter adapter = new RecyclerViewAdapter(getActivity(), mNama, mJamWal, mJamKhir);
         recyclerView.setAdapter(adapter);
@@ -51,7 +51,7 @@ public class TabFragmentBesok extends Fragment {
         mNama.clear();
         mJamWal.clear();
         mJamKhir.clear();
-        Cursor res = myDB.getAllData();
+        Cursor res = myDB.getDataBesok();
         StringBuffer buffer = new StringBuffer();
         while (res.moveToNext()){
             mNama.add(res.getString(1));
