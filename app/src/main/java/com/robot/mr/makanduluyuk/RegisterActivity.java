@@ -116,35 +116,48 @@ import java.util.regex.Pattern;
     }
 
     private void submitForm() {
-
+        boolean status = true;
         if (name.getText().toString().isEmpty()){
-
-            Toast.makeText(this, "Nama tidak boleh kosong", Toast.LENGTH_SHORT).show();
-            return;
+            name.setError("Nama tidak boleh kosong");
+            name.requestFocus();
+            status = false;
+//            Toast.makeText(this, "Nama tidak boleh kosong", Toast.LENGTH_SHORT).show();
+//            return;
         }
 
         if (username.getText().toString().isEmpty()){
-            Toast.makeText(this, "Username tidak boleh kosong", Toast.LENGTH_SHORT).show();
-            return;
+            username.setError("Username tidak boleh kosong");
+            status = false;
+//            Toast.makeText(this, "Username tidak boleh kosong", Toast.LENGTH_SHORT).show();
+//            return;
         }else  if (username.getText().toString().length() < 6){
-
-            Toast.makeText(this, "Username minimal 6 karakter", Toast.LENGTH_SHORT).show();
-            return;
+            username.setError("Username minimal 6 karakter");
+            username.requestFocus();
+            status = false;
+//            Toast.makeText(this, "Username minimal 6 karakter", Toast.LENGTH_SHORT).show();
+//            return;
         }
 
         if (password.getText().toString().length()<6){
-
-            Toast.makeText(this, "Password minimal 6 karakter", Toast.LENGTH_SHORT).show();
-            return;
+            password.setError("Password minimal 6 karakter, mengandung huruf besar, kecil, angka, dan simbol");
+            password.requestFocus();
+            status = false;
+//            Toast.makeText(this, "Password minimal 6 karakter", Toast.LENGTH_SHORT).show();
+//            return;
         }else if (!isValidPassword(password.getText().toString())) {
-            Toast.makeText(this, "Password harus berisi huruf besar dan kecil, angka, dan karakter spesial", Toast.LENGTH_SHORT).show();
-
-            return;
+            password.setError("Password minimal 6 karakter, mengandung huruf besar, kecil, angka, dan simbol");
+            password.requestFocus();
+            status = false;
+//            Toast.makeText(this, "Password tidak valid", Toast.LENGTH_SHORT).show();
+//            return;
         }
 
-        if (!confirmPassword.getText().toString().equals(password.getText().toString())){
-            Toast.makeText(this, "Konfirmasi password salah", Toast.LENGTH_SHORT).show();
-            return;
+        if(!confirmPassword.getText().toString().equals(password.getText().toString())){
+            confirmPassword.setError("Password tidak sesuai");
+            confirmPassword.requestFocus();
+            status = false;
+//            Toast.makeText(this, "Password tidak sesuai", Toast.LENGTH_SHORT).show();
+//            return;
         }
 
         int selectedId = gender.getCheckedRadioButtonId();
@@ -156,30 +169,33 @@ import java.util.regex.Pattern;
 
 
         if (dateOfBirth.getText().toString().isEmpty()){
-            Toast.makeText(this, "Isi Tanggal Lahir", Toast.LENGTH_SHORT).show();
-            return;
+            dateOfBirth.setError("Tanggal harus diisi");
+            dateOfBirth.requestFocus();
+            status = false;
+//            Toast.makeText(this, "Isi Tanggal Lahir", Toast.LENGTH_SHORT).show();
+//            return;
         }
 
-        registerUser(name.getText().toString(),
-                username.getText().toString(),
-                password.getText().toString(),
-                userGender,
-                dateOfBirth.getText().toString());
+        if(status){
+            progressDialog.setMessage("Membuat akun");
+            showDialog();
+            registerUser(name.getText().toString(),
+                    username.getText().toString(),
+                    password.getText().toString(),
+                    userGender,
+                    dateOfBirth.getText().toString());
+        }
     }
 
-    private void registerUser(final String name, final String username, final String password, final String gender, final String dob) {
+    private void registerUser(final String name, final String usernames, final String password, final String gender, final String dob) {
 
         String cancel_req_tag = "register";
-
-        progressDialog.setMessage("Adding you ...");
-        showDialog();
         StringRequest strReq = new StringRequest(Request.Method.POST,
                 Config.REGISTRATION_URL, new Response.Listener<String>() {
 
             @Override
             public void onResponse(String response) {
                 Log.d(TAG, "Register Response: " + response.toString());
-                hideDialog();
 
                 try {
                     JSONObject obj = new JSONObject(response);
@@ -187,31 +203,34 @@ import java.util.regex.Pattern;
                             .equals("Success"));
 
                     if (obj.getString(Config.JSON_RESPONSE).equals("Success")) {
-                        String user = obj.getJSONObject("user").getString("name");
-                        Toast.makeText(getApplicationContext(), "Hi " + user +", You are successfully Added!", Toast.LENGTH_SHORT).show();
-
-                        // Launch login activity
+//                        String user = obj.getString("name");
+//                        Toast.makeText(RegisterActivity.this, "Hi " + user +", You are successfully Added!", Toast.LENGTH_SHORT)
+//                                .show();
                         finish();
+                        hideDialog();
+                        // Launch login activity
                     } else {
-
-                        String errorMsg = obj.getString("error_msg");
-                        Toast.makeText(getApplicationContext(),
-                                errorMsg, Toast.LENGTH_LONG).show();
+                        String errorMsg = obj.getString(Config.JSON_RESPONSE);
+//                        Toast.makeText(getApplicationContext(),
+//                                errorMsg, Toast.LENGTH_LONG).show();
+                        username.setError(obj.getString(Config.JSON_RESPONSE));
+                        username.requestFocus();
+                        hideDialog();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
-                    Log.i("register","register error");
+//                    Log.i("register","register error");
+                    Log.i("register err", e.getMessage());
                 }
-
             }
         }, new Response.ErrorListener() {
 
             @Override
             public void onErrorResponse(VolleyError error) {
                 Log.e(TAG, "Registration Error: " + error.getMessage());
-                Toast.makeText(getApplicationContext(),
-                        error.getMessage(), Toast.LENGTH_LONG).show();
-                hideDialog();
+//                Toast.makeText(getApplicationContext(),
+//                        error.getMessage(), Toast.LENGTH_LONG).show();
+//                hideDialog();
             }
         }) {
             @Override
@@ -219,7 +238,7 @@ import java.util.regex.Pattern;
                 // Posting params to register url
                 Map<String, String> params = new HashMap<String, String>();
                 params.put(Config.NAME, name);
-                params.put(Config.USERNAME, username);
+                params.put(Config.USERNAME, usernames);
                 params.put(Config.PASSWORD, password);
                 params.put(Config.JENIS_KELAMIN, gender);
                 params.put(Config.DOB, dob);
@@ -233,12 +252,15 @@ import java.util.regex.Pattern;
 
      private void showDialog() {
          if (!progressDialog.isShowing())
+             System.out.println("Dialog show : " + progressDialog.isShowing());
              progressDialog.show();
      }
 
      private void hideDialog() {
-         if (progressDialog.isShowing())
+         if (progressDialog.isShowing()) {
+             System.out.println("Dialog hide : " + progressDialog.isShowing());
              progressDialog.dismiss();
+         }
      }
 
  }

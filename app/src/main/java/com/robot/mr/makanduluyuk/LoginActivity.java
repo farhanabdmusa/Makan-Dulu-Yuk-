@@ -43,7 +43,7 @@ public class LoginActivity extends AppCompatActivity {
 
         if(sessionManager.checkLogin()){
             finish();
-            Intent intent = new Intent(this, MainActivity.class);
+            Intent intent = new Intent(this, TabActivity.class);
             startActivity(intent);
         }
 
@@ -92,7 +92,7 @@ public class LoginActivity extends AppCompatActivity {
                                             sessionManager.createLoginSession(user.getNama(), user.getDob(), user.getJenisKelamin());
                                             Toast.makeText(LoginActivity.this, obj.getJSONArray("result").getString(0), Toast.LENGTH_SHORT).show();
                                             finish();
-                                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                            Intent intent = new Intent(LoginActivity.this, TabActivity.class);
                                             startActivity(intent);
                                         } else{
                                             Toast.makeText(LoginActivity.this, obj.getString("response"), Toast.LENGTH_SHORT)
@@ -126,23 +126,20 @@ public class LoginActivity extends AppCompatActivity {
 
         lupaPassword = findViewById(R.id.lupa_password);
         //lupa password
-        lupaPassword.setOnTouchListener(new View.OnTouchListener() {
+        /*lupaPassword.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 //kode
                 return true;
             }
-        });
+        });*/
 
 
 
-        daftar = findViewById(R.id.daftar);
-        //intent ke activity daftar
-        daftar.setOnTouchListener(new View.OnTouchListener() {
+        findViewById(R.id.daftar).setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onTouch(View v, MotionEvent event) {
+            public void onClick(View v) {
                 registrationAvtivity();
-                return true;
             }
         });
     }

@@ -1,5 +1,6 @@
 package com.robot.mr.makanduluyuk;
 
+import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -15,6 +16,9 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+
+import java.util.Calendar;
+import java.util.Date;
 
 public class TabActivity extends AppCompatActivity {
 
@@ -57,11 +61,12 @@ public class TabActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Intent intent = new Intent(TabActivity.this, InputKegiatan.class);
+                startActivity(intent);
             }
         });
 
+        mViewPager.setCurrentItem(1);
     }
 
 
@@ -102,11 +107,11 @@ public class TabActivity extends AppCompatActivity {
 
             switch (position) {
                 case 0:
-                    TabFragmentSekarang fragmentSekarang = new TabFragmentSekarang();
-                    return fragmentSekarang;
-                case 1:
                     TabFragmentBesok fragmentBesok= new TabFragmentBesok();
                     return fragmentBesok;
+                case 1:
+                    TabFragmentSekarang fragmentSekarang = new TabFragmentSekarang();
+                    return fragmentSekarang;
                 case 2:
                     TabFragmentKemarin fragmentKemarin = new TabFragmentKemarin();
                     return fragmentKemarin;
