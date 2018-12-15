@@ -2,18 +2,18 @@
 
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioGroup;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.widget.Spinner;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -24,7 +24,6 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -40,10 +39,12 @@ import java.util.regex.Pattern;
     private EditText confirmPassword;
     private RadioGroup gender;
     private Button dateCalendar;
-    private EditText dateOfBirth;
+    private EditText dateOfBirth, jawaban;
     private DatePickerDialog.OnDateSetListener tanggal;
 
     private Button register;
+    private Spinner pertanyaanSpinner;
+    private String pertanyaan;
 
 
      private static final String TAG = "RegisterActivity";
@@ -63,6 +64,8 @@ import java.util.regex.Pattern;
         dateCalendar = findViewById(R.id.calendar);
         dateOfBirth = findViewById(R.id.dateEditText);
         register = findViewById(R.id.daftarButton);
+        pertanyaanSpinner = findViewById(R.id.pertanyaan);
+        jawaban = findViewById(R.id.jawaban);
 
         // Progress dialog
         progressDialog = new ProgressDialog(this);
@@ -81,6 +84,18 @@ import java.util.regex.Pattern;
             @Override
             public void onClick(View v) {
                 submitForm();
+            }
+        });
+
+        pertanyaanSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                pertanyaan = parent.getItemAtPosition(position).toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
             }
         });
     }
@@ -175,6 +190,11 @@ import java.util.regex.Pattern;
 //            Toast.makeText(this, "Isi Tanggal Lahir", Toast.LENGTH_SHORT).show();
 //            return;
         }
+        if (jawaban.getText().toString().isEmpty()){
+            jawaban.setError("Jawaban harus diisi");
+            jawaban.requestFocus();
+            status = false;
+        }
 
         if(status){
             progressDialog.setMessage("Membuat akun");
@@ -183,12 +203,12 @@ import java.util.regex.Pattern;
                     username.getText().toString(),
                     password.getText().toString(),
                     userGender,
-                    dateOfBirth.getText().toString());
+                    dateOfBirth.getText().toString(), pertanyaan, jawaban.getText().toString());
         }
     }
 
-    private void registerUser(final String name, final String usernames, final String password, final String gender, final String dob) {
-
+    private void registerUser(final String name, final String usernames, final String password,
+                              final String gender, final String dob, final String pertanyaan, final String jawaban){
         String cancel_req_tag = "register";
         StringRequest strReq = new StringRequest(Request.Method.POST,
                 Config.REGISTRATION_URL, new Response.Listener<String>() {
@@ -242,6 +262,8 @@ import java.util.regex.Pattern;
                 params.put(Config.PASSWORD, password);
                 params.put(Config.JENIS_KELAMIN, gender);
                 params.put(Config.DOB, dob);
+                params.put(Config.PERTANYAAN, pertanyaan);
+                params.put(Config.JAWABAN, jawaban);
                 return params;
             }
         };

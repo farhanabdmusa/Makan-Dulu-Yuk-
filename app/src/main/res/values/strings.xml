@@ -14,4 +14,14 @@
     <string name="nav_header_title">Android Studio</string>
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
+    <string name="pertanyaan_hint">Pilih pertanyaan sebagai keamanan Anda?</string>
+
+    <string-array name="pertanyaan">
+        <item>Siapa nama Ibu kandung Anda?</item>
+        <item>Siapa nama Ayah kandung Anda?</item>
+        <item>Siapa nama teman dekat Anda?</item>
+        <item>Apa makanan favorit Anda?</item>
+        <item>Siapa nama hewan peliharaan Anda?</item>
+        <item>Apa benda favorit Anda?</item>
+    </string-array>
 </resources>
