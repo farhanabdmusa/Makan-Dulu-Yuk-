@@ -1,14 +1,10 @@
 package com.robot.mr.makanduluyuk;
 
-import android.app.NotificationManager;
-import android.app.PendingIntent;
-import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.NotificationCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -17,14 +13,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-
-import static android.app.Notification.EXTRA_NOTIFICATION_ID;
-import static android.content.Context.NOTIFICATION_SERVICE;
 
 public class TabFragmentSekarang extends Fragment {
-
     DatabaseHelper myDB;
 
     private static final String TAG = "MainActivity";
@@ -50,19 +40,15 @@ public class TabFragmentSekarang extends Fragment {
         return rootView;
     }
 
-
     @Override
-    public void onStart() {
-        super.onStart();
+    public void onResume() {
+        super.onResume();
         initKegiatan();
     }
 
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-    }
-
     private void initKegiatan(){
+        Log.d(TAG, "initKegiatan: preparing bitmaps");
+
         mNama.clear();
         mJamWal.clear();
         mJamKhir.clear();
@@ -74,5 +60,11 @@ public class TabFragmentSekarang extends Fragment {
             mJamKhir.add(res.getString(4));
         }
 
+    }
+
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
     }
 }
