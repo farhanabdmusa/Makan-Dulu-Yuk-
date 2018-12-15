@@ -25,12 +25,15 @@ public class SessionManager extends AppCompatActivity {
         editor = sharedPreferences.edit();
     }
 
-    public void createLoginSession(String username, String name, String dob, String jenisKelamin){
+    public void createLoginSession(String username, String name, String dob, String jenisKelamin,
+                                   String pertanyaan, String jawaban){
         editor.putBoolean(LOGIN, true);
         editor.putString(Config.USERNAME, username);
         editor.putString(Config.NAME, name);
         editor.putString(Config.DOB, dob);
         editor.putString(Config.JENIS_KELAMIN, jenisKelamin);
+        editor.putString(Config.PERTANYAAN, pertanyaan);
+        editor.putString(Config.JAWABAN, jawaban);
         editor.commit();
     }
 
@@ -40,6 +43,8 @@ public class SessionManager extends AppCompatActivity {
         user.put(Config.NAME, sharedPreferences.getString(Config.NAME, null));
         user.put(Config.DOB, sharedPreferences.getString(Config.DOB, null));
         user.put(Config.JENIS_KELAMIN, sharedPreferences.getString(Config.JENIS_KELAMIN, null));
+        user.put(Config.PERTANYAAN, sharedPreferences.getString(Config.PERTANYAAN, null));
+        user.put(Config.JAWABAN, sharedPreferences.getString(Config.JAWABAN, null));
         return user;
     }
 

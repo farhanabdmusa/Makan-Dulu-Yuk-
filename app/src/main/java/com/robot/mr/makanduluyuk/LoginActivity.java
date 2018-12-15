@@ -90,7 +90,10 @@ public class LoginActivity extends AppCompatActivity {
                                             user.setNama(userDetail.getJSONObject(0).getString(Config.NAME));
                                             user.setDob(userDetail.getJSONObject(0).getString(Config.DOB));
                                             user.setJenisKelamin(userDetail.getJSONObject(0).getString(Config.JENIS_KELAMIN));
-                                            sessionManager.createLoginSession(usernames, user.getNama(), user.getDob(), user.getJenisKelamin());
+                                            user.setPertanyaan(userDetail.getJSONObject(0).getString(Config.PERTANYAAN));
+                                            user.setJawaban(userDetail.getJSONObject(0).getString(Config.JAWABAN));
+                                            sessionManager.createLoginSession(usernames, user.getNama(), user.getDob(), user.getJenisKelamin(),
+                                                    user.getPertanyaan(), user.getJawaban());
 //                                            Toast.makeText(LoginActivity.this, obj.getJSONArray("result").getString(0), Toast.LENGTH_SHORT).show();
                                             finish();
                                             Intent intent = new Intent(LoginActivity.this, NavigationDrawer.class);
@@ -124,15 +127,14 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        lupaPassword = findViewById(R.id.lupa_password);
-        //lupa password
-        /*lupaPassword.setOnTouchListener(new View.OnTouchListener() {
+        findViewById(R.id.lupa_password).setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                //kode
-                return true;
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, LupaPasswordActivity.class);
+                startActivity(intent);
             }
-        });*/
+        });
+
 
 
 

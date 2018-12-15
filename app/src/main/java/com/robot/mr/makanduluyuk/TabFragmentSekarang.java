@@ -52,14 +52,12 @@ public class TabFragmentSekarang extends Fragment {
     public void onResume() {
         initKegiatan(getContext());
         super.onResume();
-        Toast.makeText(getContext(), "onResume", Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onStart() {
         initKegiatan(getContext());
         super.onStart();
-        Toast.makeText(getContext(), "onStart", Toast.LENGTH_SHORT).show();
     }
 
     private void initKegiatan(Context context){
