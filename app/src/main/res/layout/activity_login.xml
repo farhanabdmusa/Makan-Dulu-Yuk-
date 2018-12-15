@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@mipmap/background_login"
+    android:background="#f7efe2"
     android:gravity="center"
     android:orientation="vertical"
     tools:context=".LoginActivity">
@@ -57,8 +57,9 @@
         android:layout_width="250dp"
         android:layout_height="50dp"
         android:layout_marginTop="20dp"
-        android:background="#ff7d4b"
+        android:background="#f9a603"
         android:text="Login"
+        android:textColor="#fff"
         android:textSize="17sp"/>
 
     <TextView

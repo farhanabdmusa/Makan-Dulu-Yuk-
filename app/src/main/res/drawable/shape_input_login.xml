@@ -13,7 +13,7 @@
 
     <stroke
         android:width="3dp"
-        android:color="#ff7d4b">
+        android:color="#f25c00">
     </stroke>
 
     <padding
