@@ -52,8 +52,6 @@ public class TabFragmentKemarin extends Fragment {
     }
 
     private void initKegiatan(){
-        Log.d(TAG, "initKegiatan: preparing bitmaps");
-
         mNama.clear();
         mJamWal.clear();
         mJamKhir.clear();

@@ -182,11 +182,11 @@ public class NavigationDrawer extends AppCompatActivity
         public CharSequence getPageTitle(int position) {
             switch (position) {
                 case 0:
-                    return "Hari Ini";
-                case 1:
-                    return "Besok";
-                case 2:
                     return "Kemarin";
+                case 1:
+                    return "Hari ini";
+                case 2:
+                    return "Besok";
                 default:
                     return null;
             }

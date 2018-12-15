@@ -47,14 +47,18 @@
             android:textSize="15sp"/>
 
         <RadioGroup
+            android:id="@+id/jenisRadioGroup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <RadioButton
+                android:id="@+id/makan_rb"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:checked="true"
                 android:text="Makan"
                 android:textSize="15sp"/>
             <RadioButton
+                android:id="@+id/lain_rb"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Lainnya"

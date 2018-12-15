@@ -90,7 +90,6 @@
         android:layout_marginEnd="50dp"
         android:layout_toRightOf="@id/genderTextView"
         android:orientation="horizontal">
-
         <RadioButton
             android:id="@+id/male_radio_btn"
             android:layout_width="wrap_content"
