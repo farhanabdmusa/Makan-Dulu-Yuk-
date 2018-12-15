@@ -2,6 +2,7 @@ package com.robot.mr.makanduluyuk;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MotionEvent;
@@ -84,19 +85,18 @@ public class LoginActivity extends AppCompatActivity {
 
                                         if (obj.getString(Config.JSON_RESPONSE).equals("Success")){
                                             JSONArray userDetail = obj.getJSONArray("result");
-                                            Toast.makeText(LoginActivity.this, obj.getString("response"), Toast.LENGTH_SHORT).show();
+//                                            Toast.makeText(LoginActivity.this, obj.getString("response"), Toast.LENGTH_SHORT).show();
                                             User user = new User();
                                             user.setNama(userDetail.getJSONObject(0).getString(Config.NAME));
                                             user.setDob(userDetail.getJSONObject(0).getString(Config.DOB));
                                             user.setJenisKelamin(userDetail.getJSONObject(0).getString(Config.JENIS_KELAMIN));
-                                            sessionManager.createLoginSession(user.getNama(), user.getDob(), user.getJenisKelamin());
-                                            Toast.makeText(LoginActivity.this, obj.getJSONArray("result").getString(0), Toast.LENGTH_SHORT).show();
+                                            sessionManager.createLoginSession(usernames, user.getNama(), user.getDob(), user.getJenisKelamin());
+//                                            Toast.makeText(LoginActivity.this, obj.getJSONArray("result").getString(0), Toast.LENGTH_SHORT).show();
                                             finish();
                                             Intent intent = new Intent(LoginActivity.this, NavigationDrawer.class);
                                             startActivity(intent);
                                         } else{
-                                            Toast.makeText(LoginActivity.this, obj.getString("response"), Toast.LENGTH_SHORT)
-                                                    .show();
+                                            Snackbar.make(loginButton, response, 8000).show();
                                             loginButton.setEnabled(true);
                                         }
                                     } catch (JSONException e) {

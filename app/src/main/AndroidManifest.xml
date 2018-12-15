@@ -35,8 +35,7 @@
         <activity
             android:name=".NavigationDrawer"
             android:label="@string/title_activity_navigation_drawer"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -51,8 +50,11 @@
 
         <activity
             android:name=".MapsActivity"
-            android:label="@string/title_activity_maps"></activity>
-        <receiver android:name=".AlertReceiver"/>
+            android:label="@string/title_activity_maps" />
+
+        <receiver android:name=".AlertReceiver" />
+
+        <activity android:name=".ProfileActivity"></activity>
     </application>
 
 </manifest>

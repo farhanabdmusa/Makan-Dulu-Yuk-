@@ -1,10 +1,8 @@
-package com.robot.mr.makanduluyuk.model;
+package com.robot.mr.makanduluyuk;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-
-import com.robot.mr.makanduluyuk.R;
-import com.robot.mr.makanduluyuk.SessionManager;
+import android.widget.TextView;
 
 import java.util.HashMap;
 
@@ -19,7 +17,15 @@ public class ProfileActivity extends AppCompatActivity {
 
         SessionManager sessionManager = new SessionManager(this);
         user = sessionManager.getUsers();
-        
-        findViewById(R.id.profile_username)
+
+        TextView username = findViewById(R.id.profile_username);
+        TextView nama = findViewById(R.id.profile_nama);
+        TextView jenisKelamin = findViewById(R.id.profile_jenisKelamin);
+        TextView dob = findViewById(R.id.profile_tanggalLahir);
+
+        username.setText(user.get(Config.USERNAME));
+        nama.setText(user.get(Config.NAME));
+        jenisKelamin.setText(user.get(Config.JENIS_KELAMIN));
+        dob.setText(user.get(Config.DOB));
     }
 }

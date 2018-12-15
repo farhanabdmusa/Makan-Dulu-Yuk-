@@ -19,6 +19,7 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import java.util.Calendar;
+import java.util.HashMap;
 
 public class InputKegiatan extends AppCompatActivity {
 
@@ -27,10 +28,16 @@ public class InputKegiatan extends AppCompatActivity {
     private RadioGroup jenis;
     Calendar cAlarm;
 
+    boolean status = true;
+    int jamMulai,jamAkhir, minMulai, minAkhir, jamSekarang, minSekarang, tglSekarang, blnSekarang, thnSekarang;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_input_kegiatan);
+
+        SessionManager sessionManager = new SessionManager(this);
+        final HashMap<String, String> user = sessionManager.getUsers();
 
         myDB = new DatabaseHelper(this);
 
@@ -67,6 +74,8 @@ public class InputKegiatan extends AppCompatActivity {
                         } else {
                             eMulai.setText(hourOfDay+":"+minutes);
                         }
+                        jamMulai = hourOfDay;
+                        minMulai = minutes;
                         cAlarm = Calendar.getInstance();
                         cAlarm.set(Calendar.HOUR_OF_DAY, hourOfDay);
                         cAlarm.set(Calendar.MINUTE, minutes);
@@ -89,6 +98,21 @@ public class InputKegiatan extends AppCompatActivity {
                         } else {
                             eAkhir.setText(hourOfDay+":"+minutes);
                         }
+                        jamAkhir = hourOfDay;
+                        minAkhir = minutes;
+
+                        if(jamAkhir<jamMulai){
+                            eAkhir.setError("Waktu akhir tidak boleh kurang dari waktu mulai");
+                            eAkhir.requestFocus();
+                            status = false;
+                        } else if(jamAkhir==jamMulai && minAkhir<=minMulai){
+                            eAkhir.setError("Waktu akhir tidak boleh kurang dari waktu mulai");
+                            eAkhir.requestFocus();
+                            status = false;
+                        } else {
+                            eAkhir.setError(null);
+                            status = true;
+                        }
                     }
                 }, 0, 0, true);
                 timePickerDialog.show();
@@ -99,7 +123,6 @@ public class InputKegiatan extends AppCompatActivity {
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                boolean status = true;
 
                 int selectedId = jenis.getCheckedRadioButtonId();
                 String aktivitas;
@@ -109,7 +132,7 @@ public class InputKegiatan extends AppCompatActivity {
                     aktivitas = "lain";
 
                 if(eAkhir.getText().toString().isEmpty()){
-                    eAkhir.setError("Waktu mulai harus diisi");
+                    eAkhir.setError("Waktu akhir harus diisi");
                     eAkhir.requestFocus();
                     status = false;
                 }
@@ -132,9 +155,12 @@ public class InputKegiatan extends AppCompatActivity {
                     boolean isInserted = myDB.insertData(eNama.getText().toString(),
                             eTanggal.getText().toString(),
                             eMulai.getText().toString(),
-                            eAkhir.getText().toString());
-                    if(aktivitas == "makan"){
-                        startAlarm(cAlarm); }
+                            eAkhir.getText().toString(),
+                            user.get(Config.USERNAME));
+                    if(aktivitas.equals("makan")){
+                        System.out.println("Set alarm : " + cAlarm.get(Calendar.HOUR_OF_DAY) + ":"+ cAlarm.get(Calendar.MINUTE));
+                        startAlarm(cAlarm);
+                    }
                     if(isInserted){
                         Toast.makeText(InputKegiatan.this, "Data telah disimpan", Toast.LENGTH_LONG).show();
                         finish();
@@ -164,6 +190,15 @@ public class InputKegiatan extends AppCompatActivity {
                     @Override
                     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                         eTanggal.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
+                        if(year<cldr.get(Calendar.YEAR) || monthOfYear<cldr.get(Calendar.MONTH) ||
+                                dayOfMonth<cldr.get(Calendar.DAY_OF_MONTH)){
+                            eTanggal.setError("Tanggal sudah lewat");
+                            eTanggal.requestFocus();
+                            status = false;
+                        } else {
+                            eTanggal.setError(null);
+                            status = true;
+                        }
                     }
                 }, year, month, day);
         picker.show();

@@ -25,8 +25,9 @@ public class SessionManager extends AppCompatActivity {
         editor = sharedPreferences.edit();
     }
 
-    public void createLoginSession(String name, String dob, String jenisKelamin){
+    public void createLoginSession(String username, String name, String dob, String jenisKelamin){
         editor.putBoolean(LOGIN, true);
+        editor.putString(Config.USERNAME, username);
         editor.putString(Config.NAME, name);
         editor.putString(Config.DOB, dob);
         editor.putString(Config.JENIS_KELAMIN, jenisKelamin);
@@ -35,6 +36,7 @@ public class SessionManager extends AppCompatActivity {
 
     public HashMap<String, String> getUsers(){
         HashMap<String, String> user = new HashMap<>();
+        user.put(Config.USERNAME, sharedPreferences.getString(Config.USERNAME, null));
         user.put(Config.NAME, sharedPreferences.getString(Config.NAME, null));
         user.put(Config.DOB, sharedPreferences.getString(Config.DOB, null));
         user.put(Config.JENIS_KELAMIN, sharedPreferences.getString(Config.JENIS_KELAMIN, null));

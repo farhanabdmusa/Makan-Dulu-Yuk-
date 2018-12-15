@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -17,16 +16,19 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class NavigationDrawer extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private SectionsPagerAdapter mSectionsPagerAdapter;
     private ViewPager mViewPager;
     DatabaseHelper myDB;
+    SessionManager sessionManager;
+    HashMap<String, String> users;
     private ArrayList<String> mNama = new ArrayList<>();
     private ArrayList<String> mJamWal = new ArrayList<>();
     private ArrayList<String> mJamKhir = new ArrayList<>();
@@ -37,6 +39,9 @@ public class NavigationDrawer extends AppCompatActivity
         setContentView(R.layout.activity_navigation_drawer);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        sessionManager = new SessionManager(this);
+        users = sessionManager.getUsers();
+
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
         myDB = new DatabaseHelper(this);
@@ -66,7 +71,11 @@ public class NavigationDrawer extends AppCompatActivity
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        View navHeader = navigationView.getHeaderView(0);
         navigationView.setNavigationItemSelectedListener(this);
+
+        TextView name = navHeader.findViewById(R.id.nav_name);
+        name.setText(users.get(Config.NAME));
     }
 
     @Override
@@ -79,50 +88,6 @@ public class NavigationDrawer extends AppCompatActivity
         }
     }
 
-    /*@Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_tab, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }*/
-
-    /*@Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.navigation_drawer, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }*/
-
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -130,13 +95,15 @@ public class NavigationDrawer extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_profile) {
-
+            Intent intent = new Intent(this, ProfileActivity.class);
+            startActivity(intent);
         } else if (id == R.id.nav_logout) {
             SessionManager sessionManager = new SessionManager(getApplicationContext());
             sessionManager.logout();
             finish();
         } else if (id == R.id.nav_map){
-
+            Intent intent = new Intent(this, MapsActivity.class);
+            startActivity(intent);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -167,7 +134,8 @@ public class NavigationDrawer extends AppCompatActivity
                     TabFragmentBesok fragmentBesok = new TabFragmentBesok();
                     return fragmentBesok;
                 default:
-                    return null;
+                    fragmentSekarang = new TabFragmentSekarang();
+                    return fragmentSekarang;
             }
         }
 

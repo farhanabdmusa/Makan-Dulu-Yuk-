@@ -1,5 +1,6 @@
 package com.robot.mr.makanduluyuk;
 
+import android.content.Context;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -11,8 +12,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class TabFragmentSekarang extends Fragment {
     DatabaseHelper myDB;
@@ -30,34 +33,52 @@ public class TabFragmentSekarang extends Fragment {
 
         View rootView = inflater.inflate(R.layout.fragment_sekarang_tab, container, false);
         myDB = new DatabaseHelper(getContext());
-
+        initKegiatan(getContext());
         RecyclerView recyclerView = rootView.findViewById(R.id.recycler_view_sekarang);
         recyclerView.setHasFixedSize(true);
         RecyclerViewAdapter adapter = new RecyclerViewAdapter(getActivity(), mNama, mJamWal, mJamKhir);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-
         return rootView;
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-        initKegiatan();
+    public void onAttach(Context context) {
+        initKegiatan(context);
+        super.onAttach(context);
     }
 
-    private void initKegiatan(){
+    @Override
+    public void onResume() {
+        initKegiatan(getContext());
+        super.onResume();
+        Toast.makeText(getContext(), "onResume", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onStart() {
+        initKegiatan(getContext());
+        super.onStart();
+        Toast.makeText(getContext(), "onStart", Toast.LENGTH_SHORT).show();
+    }
+
+    private void initKegiatan(Context context){
         Log.d(TAG, "initKegiatan: preparing bitmaps");
 
         mNama.clear();
         mJamWal.clear();
         mJamKhir.clear();
-        Cursor res = myDB.getDataSekarang();
+        SessionManager sessionManager = new SessionManager(getContext());
+        HashMap<String, String> user = sessionManager.getUsers();
+        myDB = new DatabaseHelper(getContext());
+        Cursor res = myDB.getDataSekarang(user.get(Config.USERNAME));
         StringBuffer buffer = new StringBuffer();
         while (res.moveToNext()){
-            mNama.add(res.getString(1));
-            mJamWal.add(res.getString(3));
-            mJamKhir.add(res.getString(4));
+            if(res.getString(5).equals(user.get(Config.USERNAME))) {
+                mNama.add(res.getString(1));
+                mJamWal.add(res.getString(3));
+                mJamKhir.add(res.getString(4));
+            }
         }
 
     }

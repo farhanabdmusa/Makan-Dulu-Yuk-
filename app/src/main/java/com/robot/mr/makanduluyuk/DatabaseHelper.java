@@ -14,6 +14,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String COL_3 = "Tanggal";
     public static final String COL_4 = "Jam_mulai";
     public static final String COL_5 = "Jam_akhir";
+    public static final String COL_6 = "Username";
 
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, 1);
@@ -21,7 +22,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("create table " + TABLE_NAME + " (ID INTEGER PRIMARY KEY AUTOINCREMENT,KEGIATAN TEXT,TANGGAL TEXT,JAM_MULAI TEXT,JAM_AKHIR TEXT)");
+        db.execSQL("create table " + TABLE_NAME + " (ID INTEGER PRIMARY KEY AUTOINCREMENT,KEGIATAN TEXT,TANGGAL TEXT," +
+                "JAM_MULAI INTEGER,JAM_AKHIR INTEGER, USERNAME TEXT)");
     }
 
     @Override
@@ -30,13 +32,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public boolean insertData(String kegiatan, String tanggal, String jam_mulai, String jam_akhir){
+    public boolean insertData(String kegiatan, String tanggal, String jam_mulai, String jam_akhir, String username){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(COL_2, kegiatan);
         contentValues.put(COL_3, tanggal);
         contentValues.put(COL_4, jam_mulai);
         contentValues.put(COL_5, jam_akhir);
+        contentValues.put(COL_6, username);
         long result = db.insert(TABLE_NAME, null, contentValues);
         if(result == -1){
             return false;
@@ -45,7 +48,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
-    public Cursor getDataSekarang(){
+    public Cursor getDataSekarang(String username){
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor res = db.rawQuery("select *" +
                                       " from " + TABLE_NAME +
