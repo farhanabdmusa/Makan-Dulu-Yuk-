@@ -62,8 +62,9 @@ public class InputKegiatan extends AppCompatActivity {
             }
         });
 
+        final Button eMulaiButton = findViewById(R.id.mulai_et_button);
         final EditText eMulai =  findViewById(R.id.mulai_et);
-        eMulai.setOnClickListener(new View.OnClickListener() {
+        eMulaiButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 TimePickerDialog timePickerDialog = new TimePickerDialog(InputKegiatan.this, new TimePickerDialog.OnTimeSetListener() {
@@ -86,8 +87,9 @@ public class InputKegiatan extends AppCompatActivity {
             }
         });
 
+        final Button eAkhirButton = findViewById(R.id.akhir_et_button);
         final EditText eAkhir = findViewById(R.id.akhir_et);
-        eAkhir.setOnClickListener(new View.OnClickListener() {
+        eAkhirButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 TimePickerDialog timePickerDialog = new TimePickerDialog(InputKegiatan.this, new TimePickerDialog.OnTimeSetListener() {
