@@ -27,7 +27,8 @@
 
     <LinearLayout
         android:layout_width="300dp"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical">
 
         <TextView
             android:layout_width="115dp"
@@ -49,7 +50,8 @@
         <RadioGroup
             android:id="@+id/jenisRadioGroup"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
             <RadioButton
                 android:id="@+id/makan_rb"
                 android:layout_width="wrap_content"
@@ -57,12 +59,13 @@
                 android:checked="true"
                 android:text="Makan"
                 android:textSize="15sp"/>
+
             <RadioButton
                 android:id="@+id/lain_rb"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Lainnya"
-                android:textSize="15sp"/>
+                android:textSize="15sp" />
         </RadioGroup>
 
     </LinearLayout>
@@ -134,7 +137,7 @@
             android:id="@+id/calendar_button"
             android:layout_width="50dp"
             android:layout_height="wrap_content"
-            android:background="@drawable/ic_date_range_black_24dp"/>
+            android:background="@drawable/ic_date_range_kegiatan_24dp"/>
 
     </LinearLayout>
 
@@ -162,15 +165,17 @@
 
         <EditText
             android:id="@+id/mulai_et"
-            android:layout_width="180dp"
+            android:layout_width="130dp"
             android:layout_height="match_parent"
             android:hint="HH:MM"
             android:inputType="textShortMessage"
             android:textSize="15sp"/>
 
         <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:id="@+id/mulai_et_button"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_access_time_kegiatan_24dp"/>
 
     </LinearLayout>
 
@@ -198,11 +203,17 @@
 
         <EditText
             android:id="@+id/akhir_et"
-            android:layout_width="180dp"
+            android:layout_width="130dp"
             android:layout_height="match_parent"
             android:hint="HH:MM"
             android:inputType="textShortMessage"
             android:textSize="15sp"/>
+
+        <Button
+            android:id="@+id/akhir_et_button"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_timelapse_kegiatan_selesai_24dp"/>
 
     </LinearLayout>
 
