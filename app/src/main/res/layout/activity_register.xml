@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@mipmap/background_register"
     tools:context=".LoginActivity">
 
     <RelativeLayout
@@ -144,7 +145,7 @@
             android:layout_marginStart="50dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="50dp"
-            android:text="@string/pertanyaan_hint"
+            android:text="Pertanyaan sebagai keamanan anda :"
             android:textColor="#000"
             android:textSize="15sp" />
 
@@ -153,7 +154,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/pertanyaan_tv"
-            android:layout_marginStart="70dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="50dp"
             android:layout_marginEnd="50dp"
             android:background="@drawable/shape_input_register"
             android:gravity="center"
@@ -173,8 +175,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/linear"
-            android:layout_marginStart="70dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="10dp"
             android:layout_marginEnd="50dp"
             android:background="@drawable/shape_input_register"
             android:hint="Jawaban"
