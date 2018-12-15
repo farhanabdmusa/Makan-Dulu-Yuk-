@@ -96,7 +96,7 @@ public class LoginActivity extends AppCompatActivity {
                                             Intent intent = new Intent(LoginActivity.this, NavigationDrawer.class);
                                             startActivity(intent);
                                         } else{
-                                            Snackbar.make(loginButton, response, 8000).show();
+                                            Snackbar.make(loginButton, obj.getString(Config.JSON_RESPONSE), 8000).show();
                                             loginButton.setEnabled(true);
                                         }
                                     } catch (JSONException e) {
